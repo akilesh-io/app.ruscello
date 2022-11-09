@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 
 import { SocketContext } from '../pages/Context'
 
-const Sidebar = ({ children }) => {
+const Sidebar = ({ children }: any) => {
   const {
     me,
     callAccepted,

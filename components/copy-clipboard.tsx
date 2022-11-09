@@ -1,4 +1,4 @@
-export const CopyClipboard = ({ content }) => {
+export const CopyClipboard = ({ content}: any) => {
   return (
     <button
       className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-3 md:px-10 md:text-lg"
