@@ -1,35 +1,27 @@
-import { ContextProvider } from './Context'
 import Head from 'next/head'
-import VideoPlayer from '@/components/videoPlayer'
 import styles from '@/styles/Home.module.css'
+
 import Layout from '@/components/layout'
 
-import Sidebar from '@/components/sidebar'
-import Notifications from '@/components/notifications'
+import Link from 'next/link'
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <Layout>
-      <Head>
+        <Head>
           <title>Ruscello</title>
           <meta name="description" content="Hello There :)" />
           <link rel="icon" href="/favicon.png" />
         </Head>
 
-        <ContextProvider>
-          <div className="sm:text-center lg:text-left">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-              <span className="block text-indigo-600 xl:inline">
-                Video Chat
-              </span>
-            </h1>
-          </div>
-          <VideoPlayer />
-          <Sidebar>
-            <Notifications />
-          </Sidebar>
-        </ContextProvider>
+        <Link href="/room/abc">
+          <button className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              Create a room
+            </span>
+          </button>
+        </Link>
       </Layout>
     </div>
   )
