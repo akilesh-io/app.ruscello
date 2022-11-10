@@ -6,7 +6,7 @@ import VideoPlayer from '@/components/videoPlayer'
 import Sidebar from '@/components/sidebar'
 import Notifications from '@/components/notifications'
 
-const Post = () => {
+const RoomID = () => {
   const router = useRouter()
   const { id } = router.query
 
@@ -28,4 +28,4 @@ const Post = () => {
   )
 }
 
-export default Post
+export default RoomID
