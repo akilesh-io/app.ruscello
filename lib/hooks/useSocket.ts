@@ -6,7 +6,7 @@ const useSocket = () => {
   useEffect(() =>{
     if (!socketCreated.current) {
       const socketInitializer = async () => {
-        await fetch ('/api/stack')
+        await fetch ('/api/socket')
       }
       try {
         socketInitializer()
