@@ -18,7 +18,7 @@ export default function Text() {
 
   useEffect(() => {
     socketInitializer()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const socketInitializer = async () => {
     await fetch('/api/socket')

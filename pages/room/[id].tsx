@@ -52,8 +52,8 @@ const Room = () => {
 
     // clear up after
     return () => socketRef.current.disconnect()
-  }, [roomName])
-
+  }, [roomName]) // eslint-disable-line react-hooks/exhaustive-deps
+ 
   const handleRoomJoined = () => {
     navigator.mediaDevices
       .getUserMedia({
