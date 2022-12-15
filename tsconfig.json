@@ -15,13 +15,15 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
+    "noImplicitAny": false,
     "paths": {
       "@/components/*": ["components/*"],
       "@/lib/*": ["lib/*"],
       "@/styles/*": ["styles/*"],
-      "@/hooks/*": ["lib/hooks/*"]
+      "@/hooks/*": ["lib/hooks/*"],
+      "@/utils/*":["utils/*"]
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/notifications.tsx", "components/sidebar.tsx", "pages/Context.tsx", "pages/room/[id].tsx", "pages/Context.js", "pages/api/socket.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/notifications.tsx", "components/sidebar.tsx", "pages/Context.tsx", "pages/room/[id].tsx", "pages/Context.js", "pages/api/socket.ts"],
   "exclude": ["node_modules"]
 }
