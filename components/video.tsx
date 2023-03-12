@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react'
 import ReactPlayer from 'react-player'
 
 import { useEffect } from 'react'
-import io from 'Socket.IO-client'
+import io from 'socket.io-client'
 
 let socket
 
