@@ -1,6 +1,8 @@
 // pages/api/socket.js
 import { Server } from 'socket.io'
 
+import messageHandler from '@/utils/messageHandler';
+
 const SocketHandler = (req, res) => {
     if (res.socket.server.io) {
         console.log('Socket is already attached');
@@ -42,7 +44,7 @@ const SocketHandler = (req, res) => {
 
         // Triggered when server gets an icecandidate from a peer in the room.
         socket.on("ice-candidate", (candidate, roomName: string) => {
-           // console.log(candidate);
+            // console.log(candidate);
             console.log("🚀 ~ file: stack.ts:46 ~ socket.on ~ candidate", candidate)
             socket.broadcast.to(roomName).emit("ice-candidate", candidate); // Sends Candidate to the other peer in the room.
         });
@@ -61,6 +63,14 @@ const SocketHandler = (req, res) => {
             socket.leave(roomName);
             socket.broadcast.to(roomName).emit("leave");
         });
+
+        socket.on("createdMessage", (msg) => {
+            socket.broadcast.emit("newIncomingMessage", msg);
+        });
+
+        socket.on('setPlaying', (playing) => {
+            socket.broadcast.emit('update-playing', (playing))
+        })
 
     });
 

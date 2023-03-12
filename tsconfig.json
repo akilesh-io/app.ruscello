@@ -5,7 +5,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": false,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -24,6 +24,6 @@
       "@/utils/*":["utils/*"]
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/notifications.tsx", "components/sidebar.tsx", "pages/Context.tsx", "pages/room/[id].tsx", "pages/Context.js", "pages/api/socket.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/notifications.tsx", "components/sidebar.tsx", "pages/Context.tsx", "pages/room/[id].tsx", "pages/Context.js", "pages/api/socket.ts", "components/drop.tsx"],
   "exclude": ["node_modules"]
 }
