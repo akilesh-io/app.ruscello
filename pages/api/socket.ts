@@ -62,13 +62,7 @@ export default function SocketHandler(
         console.log('Socket is initializing');
 
         //cors
-        const io = new Server<ClientToServerEvents, ServerToClientEvents>(res.socket.server, {
-            cors: {
-                origin: 'https://app-ruscello.vercel.app/api/socket',
-                methods: ['GET', 'POST'],
-                credentials: true
-            }
-        });
+        const io = new Server<ClientToServerEvents, ServerToClientEvents>(res.socket.server);
 
 
         io.engine.on("connection_error", (err: unknown) => {
