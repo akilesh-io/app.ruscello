@@ -49,6 +49,10 @@ export default function SocketHandler(
     res: NextApiResponseWithSocket) {
     //    console.log(res.socket.server.io);
 
+    // CORS headers 
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+    
     if (res.socket.server.io != null) {
         console.log('Socket is already running');
         //res.socket.server.io.removeAllListeners("connection");
@@ -57,7 +61,15 @@ export default function SocketHandler(
     } else {
         console.log('Socket is initializing');
 
-        const io = new Server<ClientToServerEvents, ServerToClientEvents>(res.socket.server);
+        //cors
+        const io = new Server<ClientToServerEvents, ServerToClientEvents>(res.socket.server, {
+            cors: {
+                origin: 'https://app-ruscello.vercel.app/api/socket',
+                methods: ['GET', 'POST'],
+                credentials: true
+            }
+        });
+
 
         io.engine.on("connection_error", (err: unknown) => {
             console.log(`Connection error: ${err}`);

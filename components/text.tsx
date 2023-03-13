@@ -21,7 +21,7 @@ export default function Text() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const socketInitializer = async () => {
-    await fetch('/api/socket')
+    await fetch('https://app-ruscello.vercel.app/api/socket')
     socket = io()
 
     socket.on('connect', () => {
