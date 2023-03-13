@@ -3,12 +3,13 @@ import { Server } from 'socket.io'
 
 import messageHandler from '@/utils/sockets/messageHandler';
 
-const SocketHandler = (req, res) => {
+export default function SocketHandler(req, res) {
+    console.log(res.socket.server.io);
+
     if (res.socket.server.io) {
         console.log('Socket is already attached');
         return res.end();
     } else {
-
         const io = new Server(res.socket.server);
         res.socket.server.io = io;
 
@@ -77,5 +78,3 @@ const SocketHandler = (req, res) => {
     }
     return res.end();
 };
-
-export default SocketHandler;
