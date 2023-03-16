@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { io } from 'socket.io-client'
 
@@ -8,6 +9,12 @@ import useSocket from '@/hooks/useSocket'
 import FileUpload from '@/components/FileUpload'
 
 import styles from '@/styles/VideoCall.module.css'
+
+import Mic from '@/public/svg/mic.svg'
+import MicOff from '@/public/svg/mic off.svg'
+import VideoCam from '@/public/svg/videocam.svg'
+import VideoCamOff from '@/public/svg/videocam off.svg'
+import CallEnd from '@/public/svg/call end.svg'
 
 const ICE_SERVERS = {
   iceServers: [
@@ -287,13 +294,21 @@ const VideoCall = () => {
       {/* Align buttons in center bottom fixed */}
       <div className=" flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10">
         <button onClick={toggleMic} type="button">
-          {micActive ? 'Mute' : 'UnMute'}
+          {micActive ? (
+            <Image src={Mic} alt="Mic-on" />
+          ) : (
+            <Image src={MicOff} alt="Mic-off" />
+          )}
         </button>
         <button onClick={leaveRoom} type="button">
-          Leave
+          <Image src={CallEnd} alt="Call-end" />
         </button>
         <button onClick={toggleCamera} type="button">
-          {cameraActive ? 'Stop Camera' : 'Start Camera'}
+          {cameraActive ? (
+            <Image src={VideoCam} alt="Cam-on" />
+          ) : (
+            <Image src={VideoCamOff} alt="Cam-off" />
+          )}
         </button>
       </div>
     </div>
