@@ -1,0 +1,9 @@
+.container {
+  height: 100vh;
+  padding: 20px;
+}
+
+.draggable {
+  cursor: -webkit-grab;
+  cursor: grab;
+}

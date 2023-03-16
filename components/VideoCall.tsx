@@ -7,6 +7,8 @@ import Draggable from 'react-draggable'
 import useSocket from '@/hooks/useSocket'
 import FileUpload from '@/components/FileUpload'
 
+import styles from '@/styles/VideoCall.module.css'
+
 const ICE_SERVERS = {
   iceServers: [
     {
@@ -29,6 +31,7 @@ const VideoCall = () => {
   const hostRef = useRef<any>(false)
 
   const { id: roomName } = router.query
+
   useEffect(() => {
     socketRef.current = io()
 
@@ -254,23 +257,37 @@ const VideoCall = () => {
   }
 
   return (
-    <div>
+    // create a inline css
+
+    <div className={styles.container}>
       <div>
         <FileUpload />
       </div>
-      <div>
-        {/* align side by side  video */}
 
-          <Draggable>
-            {/* Align video side by side */}
-        <div className='flex flex-row justify-center items-center'>
-            <video className='w-72 bg-blue-100 rounded border-blue-400' autoPlay muted ref={userVideoRef} />                    
-            <video className='w-72 bg-green-100 rounded border-green-400' autoPlay ref={peerVideoRef} />
+      {/* bottom allign right */}
+      <Draggable bounds="parent">
+        <div className="flex flex-col justify-end items-end fixed bottom-0 right-0 space-y-10">
+          {/* Align video side by side */}
+          <div className="flex flex-row justify-center items-center">
+            <video
+              className="w-72 bg-blue-100 rounded border-blue-400"
+              autoPlay
+              muted
+              ref={userVideoRef}
+            />
+            <video
+              className="w-72 bg-green-100 rounded border-green-400"
+              autoPlay
+              ref={peerVideoRef}
+            />
+          </div>
         </div>
-            </Draggable>
-        
+      </Draggable>
+
+      {/* Align buttons in center bottom fixed */}
+      <div className=" flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10">
         <button onClick={toggleMic} type="button">
-          {micActive ? 'Mute Mic' : 'UnMute Mic'}
+          {micActive ? 'Mute' : 'UnMute'}
         </button>
         <button onClick={leaveRoom} type="button">
           Leave
@@ -284,4 +301,3 @@ const VideoCall = () => {
 }
 
 export default VideoCall
- 
