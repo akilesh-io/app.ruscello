@@ -271,19 +271,18 @@ const VideoCall = () => {
         <FileUpload />
       </div>
 
-      {/* bottom allign right */}
       <Draggable bounds="parent">
-        <div className="flex flex-col justify-end items-end fixed bottom-0 right-0 space-y-10">
-          {/* Align video side by side */}
-          <div className="flex flex-row justify-center items-center">
+        <div className="flex flex-col justify-end items-end fixed bottom-2 right-4 space-y-10">
+          <div className="flex flex-row ">
             <video
-              className="w-72 bg-blue-100 rounded border-blue-400"
+              className="w-40 bg-blue-100 rounded border-blue-400 mr-2"
               autoPlay
               muted
               ref={userVideoRef}
             />
+
             <video
-              className="w-72 bg-green-100 rounded border-green-400"
+              className="w-40 bg-green-100 rounded border-green-400"
               autoPlay
               ref={peerVideoRef}
             />
