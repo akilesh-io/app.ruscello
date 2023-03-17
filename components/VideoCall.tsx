@@ -267,10 +267,6 @@ const VideoCall = () => {
     // create a inline css
 
     <div className={styles.container}>
-      <div>
-        <FileUpload />
-      </div>
-
       <Draggable bounds="parent">
         <div className="flex flex-col justify-end items-end fixed bottom-2 right-4 space-y-10">
           <div className="flex flex-row ">
