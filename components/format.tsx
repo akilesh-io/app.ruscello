@@ -10,6 +10,6 @@ export const formatTime = (time) => {
   const seconds = date.getUTCSeconds().toString().padStart(2, '0')
   if (hours) {
     //if video have hours
-    return `${hours}:${minutes.toString().padStart(2, '0')} `
+    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds} `
   } else return `${minutes}:${seconds}`
 }
