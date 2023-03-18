@@ -6,7 +6,6 @@ import { io } from 'socket.io-client'
 import Draggable from 'react-draggable'
 
 import useSocket from '@/hooks/useSocket'
-import FileUpload from '@/components/FileUpload'
 
 import styles from '@/styles/VideoCall.module.css'
 
@@ -287,7 +286,7 @@ const VideoCall = () => {
       </Draggable>
 
       {/* Align buttons in center bottom fixed */}
-      <div className=" flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10">
+      <div className="flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10">
         <button onClick={toggleMic} type="button">
           {micActive ? (
             <Image src={Mic} alt="Mic-on" />

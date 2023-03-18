@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { io, Socket } from 'socket.io-client'
 import { useState, useEffect } from 'react'
 import { DefaultEventsMap } from '@socket.io/component-emitter'
 
-let socket: any;
+let socket: any
 
 type Message = {
   author: string
@@ -10,18 +11,16 @@ type Message = {
 }
 
 export default function Text() {
-
-  const [username, setUsername] = useState("");
-  const [chosenUsername, setChosenUsername] = useState("");
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<Array<Message>>([]);
+  const [username, setUsername] = useState('')
+  const [chosenUsername, setChosenUsername] = useState('')
+  const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState<Array<Message>>([])
 
   useEffect(() => {
     socketInitializer()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const socketInitializer = async () => {
-    await fetch('/api/socket')
+  const socketInitializer = () => {
     socket = io()
 
     socket.on('connect', () => {
@@ -37,7 +36,7 @@ export default function Text() {
     })
   }
 
-  const sendMessage = async () => {
+  const sendMessage = () => {
     socket.emit('createdMessage', { author: chosenUsername, message })
     setMessages((currentMsg) => [
       ...currentMsg,
