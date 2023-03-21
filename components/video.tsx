@@ -24,7 +24,7 @@ export default function Video({ videoFilePath }) {
   const [videoState, setVideoState] = useState({
     playing: true,
     muted: false,
-    volume: 0.5,
+    volume: 1,
     played: 0,
     seeking: false,
     buffer: true,
@@ -60,7 +60,7 @@ export default function Video({ videoFilePath }) {
 
   //console.log("========", (controlRef.current.style.visibility = "false"));
   const progressHandler = (state) => {
-    if (count > 3) {
+    if (count > 2) {
       console.log('close')
       controlRef.current.style.visibility = 'hidden' // toggling player control container
     } else if (controlRef.current.style.visibility === 'visible') {

@@ -3,10 +3,6 @@ import {
   makeStyles,
   Slider,
   withStyles,
-  Button,
-  Tooltip,
-  Popover,
-  Grid,
 } from '@material-ui/core'
 import {
   FastForward,
