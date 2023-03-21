@@ -21,7 +21,7 @@ export default function Text() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const socketInitializer = () => {
-    socket = io()
+    socket = io("https://ruscello-api-ecfbf.ondigitalocean.app/")
 
     socket.on('connect', () => {
       console.log('connected')

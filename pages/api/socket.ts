@@ -123,9 +123,9 @@ export default function SocketHandler(
                 socket.broadcast.to(roomName).emit("leave");
             });
 
-            socket.on("createdMessage", (msg) => {
-                socket.broadcast.emit("newIncomingMessage", msg);
-            });
+            // socket.on("createdMessage", (msg) => {
+            //     socket.broadcast.emit("newIncomingMessage", msg);
+            // });
 
             socket.on('setPlaying', (playing) => {
                 socket.broadcast.emit('update-playing', (playing))
