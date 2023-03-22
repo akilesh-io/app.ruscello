@@ -1,59 +1,66 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { io, Socket } from 'socket.io-client'
-import { useState, useEffect } from 'react'
-import { DefaultEventsMap } from '@socket.io/component-emitter'
+import { io, Socket } from "socket.io-client";
+import { useState, useEffect } from "react";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 
-let socket: any
+let socket: any;
 
 type Message = {
-  author: string
-  message: string
-}
+  author: string;
+  message: string;
+};
 
 export default function Text() {
-  const [username, setUsername] = useState('')
-  const [chosenUsername, setChosenUsername] = useState('')
-  const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState<Array<Message>>([])
+  const [username, setUsername] = useState("");
+  const [chosenUsername, setChosenUsername] = useState("");
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<Array<Message>>([]);
 
-  
   useEffect(() => {
-    socketInitializer()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    socketInitializer();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const socketInitializer = () => {
-    socket = io("https://ruscello-api-ecfbf.ondigitalocean.app/stream")
+    socket = io("https://ruscello-api-ecfbf.ondigitalocean.app/stream", {
+      reconnectionDelay: 1000,
+      reconnection: true,
+      reconnectionAttempts: 10,
+      transports: ["websocket"],
+      agent: false,
+      upgrade: false,
+      rejectUnauthorized: false,
+    });
 
-    socket.on('connect', () => {
-      console.log('connected')
-    })
+    socket.on("connect", () => {
+      console.log("connected");
+    });
 
-    socket.on('newIncomingMessage', (msg: any) => {
+    socket.on("newIncomingMessage", (msg: any) => {
       setMessages((currentMsg) => [
         ...currentMsg,
         { author: msg.author, message: msg.message },
-      ])
-      console.log(messages)
-    })
-  }
+      ]);
+      console.log(messages);
+    });
+  };
 
   const sendMessage = () => {
-    socket.emit('createdMessage', { author: chosenUsername, message })
+    socket.emit("createdMessage", { author: chosenUsername, message });
     setMessages((currentMsg) => [
       ...currentMsg,
       { author: chosenUsername, message },
-    ])
-    setMessage('')
-  }
+    ]);
+    setMessage("");
+  };
 
   const handleKeypress = (e: any) => {
     //it triggers by pressing the enter key
     if (e.keyCode === 13) {
       if (message) {
-        sendMessage()
+        sendMessage();
       }
     }
-  }
+  };
 
   return (
     <div className="flex items-center p-4 mx-auto min-h-screen justify-center bg-purple-500">
@@ -72,13 +79,13 @@ export default function Text() {
               onChange={(e) => setUsername(e.target.value)}
               onKeyUp={(e) => {
                 if (e.keyCode === 13) {
-                  setChosenUsername(username)
+                  setChosenUsername(username);
                 }
               }}
             />
             <button
               onClick={() => {
-                setChosenUsername(username)
+                setChosenUsername(username);
               }}
               className="bg-white rounded-md px-4 py-2 text-xl"
             >
@@ -100,7 +107,7 @@ export default function Text() {
                     >
                       {msg.author} : {msg.message}
                     </div>
-                  )
+                  );
                 })}
               </div>
               <div className="border-t border-gray-300 w-full flex rounded-bl-md">
@@ -116,7 +123,7 @@ export default function Text() {
                   <button
                     className="group-hover:text-white px-3 h-full"
                     onClick={() => {
-                      sendMessage()
+                      sendMessage();
                     }}
                   >
                     Send
@@ -128,5 +135,5 @@ export default function Text() {
         )}
       </main>
     </div>
-  )
+  );
 }
