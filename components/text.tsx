@@ -16,6 +16,7 @@ export default function Text() {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState<Array<Message>>([])
 
+  
   useEffect(() => {
     socketInitializer()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -62,12 +63,18 @@ export default function Text() {
             <h3 className="font-bold text-white text-xl">
               How people should call you?
             </h3>
+            {/* on press enter */}
             <input
               type="text"
               placeholder="Identity..."
               value={username}
               className="p-3 rounded-md outline-none"
               onChange={(e) => setUsername(e.target.value)}
+              onKeyUp={(e) => {
+                if (e.keyCode === 13) {
+                  setChosenUsername(username)
+                }
+              }}
             />
             <button
               onClick={() => {
