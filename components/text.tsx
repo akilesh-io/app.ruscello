@@ -17,11 +17,19 @@ export default function Text() {
   const [messages, setMessages] = useState<Array<Message>>([]);
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     socketInitializer();
+    }
+
+    // return () => {
+    //   socket.close();
+    //   socket.disconnect();
+    //  }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const socketInitializer = () => {
-    socket = io("https://ruscello-api-ecfbf.ondigitalocean.app/stream", {
+    // https://ruscello-api-ecfbf.ondigitalocean.app/text
+    socket = io("https://ruscello-api-ecfbf.ondigitalocean.app/text", {
       reconnectionDelay: 1000,
       reconnection: true,
       reconnectionAttempts: 10,
@@ -42,6 +50,12 @@ export default function Text() {
       ]);
       console.log(messages);
     });
+
+    socket.on("disconnect", () => {
+      console.log("disconnected");
+      socket.disconnect();
+    });
+
   };
 
   const sendMessage = () => {
