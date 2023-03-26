@@ -1,73 +1,23 @@
 // pages/api/socket.js
-import { Server, Namespace } from 'socket.io'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { Server } from 'socket.io'
 
-import messageHandler from '@/utils/sockets/messageHandler';
-
-import type { Server as HTTPServer } from 'http'
-import type { Socket as NetSocket } from 'net'
-import type { Server as IOServer } from 'socket.io'
-
-interface SocketServer extends HTTPServer {
-    io?: IOServer | undefined
-}
-
-interface SocketWithIO extends NetSocket {
-    server: SocketServer
-}
-
-interface NextApiResponseWithSocket extends NextApiResponse {
-    socket: SocketWithIO
-}
-interface ServerToClientEvents {
-    'created': () => void;
-    'joined': () => void;
-    'full': () => void;
-    'ready': () => void;
-    'ice-candidate': (candidate: RTCIceCandidate) => void;
-    'offer': (offer: RTCSessionDescriptionInit) => void;
-    'answer': (answer: RTCSessionDescriptionInit) => void;
-    'leave': () => void;
-    'newIncomingMessage': (msg: string) => void;
-    'update-playing': (playing: boolean) => void;    
-}
-
-interface ClientToServerEvents {
-    'join': (roomName: string) => void;
-    'ready': (roomName: string) => void;
-    'ice-candidate': (candidate: RTCIceCandidate, roomName: string) => void;
-    'offer': (offer: RTCSessionDescriptionInit, roomName: string) => void;
-    'answer': (answer: RTCSessionDescriptionInit, roomName: string) => void;
-    'leave': (roomName: string) => void;
-    'createdMessage': (msg: string) => void;
-    'setPlaying': (playing: boolean) => void;    
-}
-
-
-export default function SocketHandler(
-    req: NextApiRequest,
-    res: NextApiResponseWithSocket) {
+export default function SocketHandler(req, res) {
     //    console.log(res.socket.server.io);
 
     // CORS headers 
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    
+
     if (res.socket.server.io != null) {
         console.log('Socket is already running');
-        //res.socket.server.io.removeAllListeners("connection");
-        
-        //    res.end();
     } else {
         console.log('Socket is initializing');
 
-        //cors
-        const io = new Server<ClientToServerEvents, ServerToClientEvents>(res.socket.server);
-
+        const io = new Server(res.socket.server);
 
         io.engine.on("connection_error", (err: unknown) => {
             console.log(`Connection error: ${err}`);
-          });
+        });
 
         res.socket.server.io = io;
 
@@ -93,7 +43,6 @@ export default function SocketHandler(
                     socket.emit("full");
                 }
                 //console.log(rooms);
-                console.log("🚀 ~ file: stack.ts:35 ~ socket.on ~ rooms", rooms)
             });
 
             // Triggered when the person who joined the room is ready to communicate.
@@ -122,10 +71,6 @@ export default function SocketHandler(
                 socket.leave(roomName);
                 socket.broadcast.to(roomName).emit("leave");
             });
-
-            // socket.on("createdMessage", (msg) => {
-            //     socket.broadcast.emit("newIncomingMessage", msg);
-            // });
 
             socket.on('setPlaying', (playing) => {
                 socket.broadcast.emit('update-playing', (playing))
