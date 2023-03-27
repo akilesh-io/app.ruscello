@@ -39,7 +39,7 @@ const VideoCall = () => {
   const { id: roomName } = router.query
 
   useEffect(() => {
-    socketRef.current = io('http://localhost:5000',{
+    socketRef.current = io('https://ruscello-api-ecfbf.ondigitalocean.app/',{
       reconnectionDelay: 1000,
       reconnection: true,
       reconnectionAttempts: 10,
