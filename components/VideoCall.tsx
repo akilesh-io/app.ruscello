@@ -39,7 +39,16 @@ const VideoCall = () => {
   const { id: roomName } = router.query
 
   useEffect(() => {
-    socketRef.current = io()
+    socketRef.current = io('http://localhost:5000',{
+      reconnectionDelay: 1000,
+      reconnection: true,
+      reconnectionAttempts: 10,
+      transports: ["websocket"],
+      agent: false,
+      upgrade: false,
+      rejectUnauthorized: false,
+      withCredentials: true,
+    })
 
     // First we join a room
     socketRef.current.emit('join', roomName)

@@ -37,6 +37,7 @@ export default function Text() {
       agent: false,
       upgrade: false,
       rejectUnauthorized: false,
+      withCredentials: true,
     });
 
     socket.on("connect", () => {
