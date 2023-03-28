@@ -22,7 +22,8 @@
       "@/styles/*": ["styles/*"],
       "@/hooks/*": ["lib/hooks/*"],
       "@/utils/*":["utils/*"],
-      "@/public/*":["public/*"]
+      "@/public/*":["public/*"],
+      "@/context/*":["context/*"],
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/notifications.tsx", "components/sidebar.tsx", "pages/Context.tsx", "pages/room/[id].tsx", "pages/Context.js", "pages/api/socket.ts", "components/drop.tsx"],

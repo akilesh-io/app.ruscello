@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { io, Socket } from "socket.io-client";
+import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-
-let socket: any;
+import { socket } from "@/context/socketUrl";
 
 type Message = {
   author: string;
@@ -28,17 +27,6 @@ export default function Text() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const socketInitializer = () => {
-    // https://ruscello-api-ecfbf.ondigitalocean.app/text
-    socket = io("https://ruscello-api-ecfbf.ondigitalocean.app/text", {
-      reconnectionDelay: 1000,
-      reconnection: true,
-      reconnectionAttempts: 10,
-      transports: ["websocket"],
-      agent: false,
-      upgrade: false,
-      rejectUnauthorized: false,
-      withCredentials: true,
-    });
 
     socket.on("connect", () => {
       console.log("connected");
