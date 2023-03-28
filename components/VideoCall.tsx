@@ -47,7 +47,6 @@ const VideoCall = () => {
       agent: false,
       upgrade: false,
       rejectUnauthorized: false,
-      withCredentials: true,
     })
 
     // First we join a room
