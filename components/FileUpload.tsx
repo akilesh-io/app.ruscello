@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import Video from './video'
+import dynamic from 'next/dynamic'
+const Video = dynamic(() => import('./video'))
 
 const FileUpload = () => {
   const [dragging, setDragging] = useState(false)
