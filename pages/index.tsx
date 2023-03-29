@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useState , useContext } from "react";
+import React, { useState } from "react";
 
 import styles from "@/styles/Home.module.css";
 import Layout from "@/components/layout";
