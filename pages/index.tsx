@@ -2,20 +2,17 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState , useContext } from "react";
 
-import { UserNameContext } from "@/context/userName";
 import styles from "@/styles/Home.module.css";
 import Layout from "@/components/layout";
 
 export default function Home() {
   const router = useRouter();
   const [userName, setUserName] = useState("");
-  const { setUserName1 } = useContext(UserNameContext);
 
   const joinRoom = (e) => {
     e.preventDefault();
     //localStorage.setItem('userName', userName);
-    setUserName1(userName);
-    console.log("🚀 ~ file: index.tsx:19 ~ joinRoom ~ setUserName1:", setUserName1)
+
     router.push(`/room/${Math.random().toString(36).slice(2)}`);
   };
 
