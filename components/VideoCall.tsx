@@ -2,10 +2,10 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { io } from 'socket.io-client'
+import { socket } from "@/context/socketUrl";
 
 import Draggable from 'react-draggable'
 
-import useSocket from '@/hooks/useSocket'
 
 import styles from '@/styles/VideoCall.module.css'
 
@@ -24,7 +24,6 @@ const ICE_SERVERS = {
 }
 
 const VideoCall = () => {
-  useSocket()
   const [micActive, setMicActive] = useState(true)
   const [cameraActive, setCameraActive] = useState(true)
 
@@ -39,40 +38,31 @@ const VideoCall = () => {
   const { id: roomName } = router.query
 
   useEffect(() => {
-    socketRef.current = io('https://ruscello-api-ecfbf.ondigitalocean.app/',{
-      reconnectionDelay: 1000,
-      reconnection: true,
-      reconnectionAttempts: 10,
-      transports: ["websocket"],
-      agent: false,
-      upgrade: false,
-      rejectUnauthorized: false,
-    })
 
     // First we join a room
-    socketRef.current.emit('join', roomName)
+    //socket.emit('join', {room: roomName, socketId: socket.io.engine.id})
 
-    socketRef.current.on('joined', handleRoomJoined)
+    socket.on('joined', handleRoomJoined)
     // If the room didn't exist, the server would emit the room was 'created'
-    socketRef.current.on('created', handleRoomCreated)
+    socket.on('created', handleRoomCreated)
     // Whenever the next person joins, the server emits 'ready'
-    socketRef.current.on('ready', initiateCall)
+    socket.on('ready', initiateCall)
 
     // Emitted when a peer leaves the room
-    socketRef.current.on('leave', onPeerLeave)
+    socket.on('leave', onPeerLeave)
 
     // If the room is full, we show an alert
-    socketRef.current.on('full', () => {
+    socket.on('full', () => {
       window.location.href = '/'
     })
 
     // Event called when a remote user initiating the connection and
-    socketRef.current.on('offer', handleReceivedOffer)
-    socketRef.current.on('answer', handleAnswer)
-    socketRef.current.on('ice-candidate', handlerNewIceCandidateMsg)
+    socket.on('offer', handleReceivedOffer)
+    socket.on('answer', handleAnswer)
+    socket.on('ice-candidate', handlerNewIceCandidateMsg)
 
     // clear up after
-    return () => socketRef.current.disconnect()
+    //return () => socket.disconnect()
   }, [roomName]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleRoomJoined = () => {
@@ -88,7 +78,7 @@ const VideoCall = () => {
         userVideoRef.current.onloadedmetadata = () => {
           userVideoRef.current.play()
         }
-        socketRef.current.emit('ready', roomName)
+        socket.emit('ready', roomName)
       })
       .catch((err) => {
         /* handle the error */
@@ -132,7 +122,7 @@ const VideoCall = () => {
         .createOffer()
         .then((offer) => {
           rtcConnectionRef.current.setLocalDescription(offer)
-          socketRef.current.emit('offer', offer, roomName)
+          socket.emit('offer', offer, roomName)
         })
         .catch((error) => {
           console.log(error)
@@ -194,7 +184,7 @@ const VideoCall = () => {
         .createAnswer()
         .then((answer) => {
           rtcConnectionRef.current.setLocalDescription(answer)
-          socketRef.current.emit('answer', answer, roomName)
+          socket.emit('answer', answer, roomName)
         })
         .catch((error) => {
           console.log(error)
@@ -210,7 +200,7 @@ const VideoCall = () => {
 
   const handleICECandidateEvent = (event) => {
     if (event.candidate) {
-      socketRef.current.emit('ice-candidate', event.candidate, roomName)
+      socket.emit('ice-candidate', event.candidate, roomName)
     }
   }
 
@@ -247,7 +237,7 @@ const VideoCall = () => {
   }
 
   const leaveRoom = () => {
-    socketRef.current.emit('leave', roomName) // Let's the server know that user has left the room.
+    socket.emit('leave', roomName) // Let's the server know that user has left the room.
 
     if (userVideoRef.current.srcObject) {
       userVideoRef.current.srcObject
@@ -267,6 +257,10 @@ const VideoCall = () => {
       rtcConnectionRef.current.close()
       rtcConnectionRef.current = null
     }
+
+    localStorage.removeItem('userName');
+    window.location.reload();
+
     router.push('/')
   }
 
