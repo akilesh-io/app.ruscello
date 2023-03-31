@@ -4,12 +4,10 @@ import { useEffect } from "react";
 import { socket } from "@/context/socketUrl";
 import { useRouter } from "next/router";
 
-const VideoCall = dynamic(() => import("@/components/VideoCall"));
+const FaceTime = dynamic(() => import("@/components/FaceTime"), { ssr: false });
 const FileUpload = dynamic(() => import("@/components/FileUpload"));
 
-//import styles from '@/styles/VideoCall.module.css'
 export default function Room() {
-
   const router = useRouter();
   const { id: roomName } = router.query;
 
@@ -20,12 +18,12 @@ export default function Room() {
   return (
     <Layout>
       <div className="relative w-full h-full">
-        <div className="absolute top-0 left-0 w-full h-full">
+       <div className="absolute top-0 left-0 w-full h-full">
           <FileUpload />
         </div>
 
-        <VideoCall />
-      </div>
+        <FaceTime />
+       </div> 
     </Layout>
   );
 }
