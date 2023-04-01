@@ -13,6 +13,7 @@ import MicOff from "@/public/svg/mic off.svg";
 import VideoCam from "@/public/svg/videocam.svg";
 import VideoCamOff from "@/public/svg/videocam off.svg";
 import CallEnd from "@/public/svg/call end.svg";
+import Call from "@/public/svg/call.svg";
 
 const FaceTime = () => {
   const router = useRouter();
@@ -20,32 +21,43 @@ const FaceTime = () => {
   const [micActive, setMicActive] = useState(true);
   const [cameraActive, setCameraActive] = useState(true);
 
-  function toggleMic() {
-    setMicActive((prev) => !prev);
-  }
+  // function toggleMic() {
+  //   setMicActive((prev) => !prev);
+  // }
 
-  const toggleCamera = () => {
-    setCameraActive((prev) => !prev);
-  }
+  // const toggleCamera = () => {
+  //   console.log(webRTCAdaptor.mediaManager.cameraEnabled);
+  //   if (webRTCAdaptor.mediaManager.cameraEnabled) {
+  //     webRTCAdaptor.turnOffLocalCamera(roomName);
+  //     setCameraActive(false);
+  //     console.log("1");
+  //   } else {
+  //     webRTCAdaptor.turnOnLocalCamera(roomName);
+  //     setCameraActive(true);
+  //     console.log("2");
+  //   }
+  // };
 
   function join() {
     webRTCAdaptor.join(roomName);
-    console.log("🚀 ~ file: faceTime.tsx:33 ~ join ~ roomName:", roomName)
+    console.log("🚀 ~ file: faceTime.tsx:33 ~ join ~ roomName:", roomName);
   }
 
   function leave() {
-    socket.emit('leave', roomName) // Let's the server know that user has left the room.
+    socket.emit("leave", roomName); // Let's the server know that user has left the room.
     webRTCAdaptor.leave(roomName);
 
-    router.push('/')
+    router.push("/");
   }
 
   function turnOffLocalCamera() {
     webRTCAdaptor.turnOffLocalCamera(roomName);
+    setCameraActive(false);
   }
 
   function turnOnLocalCamera() {
     webRTCAdaptor.turnOnLocalCamera(roomName);
+    setCameraActive(true);
   }
 
   function muteLocalMic() {
@@ -56,56 +68,50 @@ const FaceTime = () => {
     webRTCAdaptor.unmuteLocalMic();
   }
 
-	  //----------------------------------
-    var pc_config =
-    {
-      'iceServers' : [ {
-        'urls' : 'stun:stun1.l.google.com:19302'
-      } ]
-    };
-    
-  
-    var sdpConstraints = 
-    {
-      OfferToReceiveAudio : true,
-      OfferToReceiveVideo : true
-        
-    };
-    var mediaConstraints = {
-              video: true,
-              audio: true
-            };
-    
-    var webRTCAdaptor = new WebRTCAdaptor({
-        websocket_url: "wss://ant.akilesh.io:5443/Ruscello/websocket",
-        mediaConstraints: mediaConstraints,
-        peerconnection_config: pc_config,
-        sdp_constraints: sdpConstraints,
-        localVideoId: "localVideo",
-        remoteVideoId: "remoteVideo",
-        callback: function(info) {
-          if (info == "initialized") {
-            console.log("initialized");
-          }
-          else if (info == "joined") {
-            //joined the stream
-            console.log("joined");
-          }
-          else if (info == "leaved") {
-            //leaved the stream
-            console.log("leaved");
- 
-          }
-        },
-        callbackError: function(error) {
-          //some of the possible errors, NotFoundError, SecurityError,PermissionDeniedError
-          
-          console.log("error callback: " + error);
-          //alert(error);
-        }
-      });
-// call a function after all the components have been rendered rather than using useEffect
+  //----------------------------------
+  var pc_config = {
+    iceServers: [
+      {
+        urls: "stun:stun1.l.google.com:19302",
+      },
+    ],
+  };
 
+  var sdpConstraints = {
+    OfferToReceiveAudio: true,
+    OfferToReceiveVideo: true,
+  };
+  var mediaConstraints = {
+    video: true,
+    audio: true,
+  };
+
+  var webRTCAdaptor = new WebRTCAdaptor({
+    websocket_url: "wss://ant.akilesh.io:5443/Ruscello/websocket",
+    mediaConstraints: mediaConstraints,
+    peerconnection_config: pc_config,
+    sdp_constraints: sdpConstraints,
+    localVideoId: "localVideo",
+    remoteVideoId: "remoteVideo",
+    callback: function (info) {
+      if (info == "initialized") {
+        console.log("initialized");
+      } else if (info == "joined") {
+        //joined the stream
+        console.log("joined");
+      } else if (info == "leaved") {
+        //leaved the stream
+        console.log("leaved");
+      }
+    },
+    callbackError: function (error) {
+      //some of the possible errors, NotFoundError, SecurityError,PermissionDeniedError
+
+      console.log("error callback: " + error);
+      //alert(error);
+    },
+  });
+  // call a function after all the components have been rendered rather than using useEffect
 
   return (
     //---------------
@@ -129,9 +135,42 @@ const FaceTime = () => {
         </div>
       </Draggable>
 
-      {/* Align buttons in center bottom fixed */}
       <div className="flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10">
-        <button onClick={toggleMic} type="button">
+        <button onClick={muteLocalMic} type="button">
+          <Image src={MicOff} alt="Mic-off" />
+        </button>
+
+        <button onClick={unmuteLocalMic} type="button">
+          <Image src={Mic} alt="Mic-on" />
+        </button>
+
+        <button onClick={leave} type="button">
+          <Image src={CallEnd} alt="Call-end" />
+        </button>
+
+        <button onClick={join} type="button">
+          <Image src={Call} alt="Call" />
+        </button>
+
+        <button onClick={turnOffLocalCamera} type="button">
+          <Image src={VideoCamOff} alt="Cam-off" />
+        </button>
+
+        <button onClick={turnOnLocalCamera} type="button">
+          <Image src={VideoCam} alt="Cam-on" />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default FaceTime;
+
+//-----------------------------
+
+{
+  /* 
+               <button onClick={toggleMic} type="button">
           {micActive ? (
             <Image src={Mic} alt="Mic-on" />
           ) : (
@@ -148,14 +187,6 @@ const FaceTime = () => {
             <Image src={VideoCamOff} alt="Cam-off" />
           )}
         </button>
-        <button 
-        className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-        onClick={join} type="button">
-          Join
-        </button>
-      </div>
-    </div>
-  );
-};
 
-export default FaceTime;
+*/
+}

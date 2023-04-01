@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { socket } from "@/context/socketUrl";
 import { useRouter } from "next/router";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const FaceTime = dynamic(() => import("@/components/FaceTime"), { ssr: false });
 const FileUpload = dynamic(() => import("@/components/FileUpload"));
@@ -10,8 +12,14 @@ const YTPlayer = dynamic(() => import("@/components/YouTube"));
 
 export default function Room() {
   const router = useRouter();
+
+  const fullPath =
+    typeof window !== "undefined" && window.location.origin
+      ? window.location.origin
+      : "https://app-ruscello.vercel.app";
+
   const { id: roomName } = router.query;
-  const [youtube, youtubeActive] = useState(false);
+  const [youtube, youtubeActive] = useState(true);
 
   useEffect(() => {
     socket.emit("join", { room: roomName, socketId: socket.io.engine.id });
@@ -30,6 +38,12 @@ export default function Room() {
         >
           Toggle
         </button>
+        <CopyToClipboard
+          text={fullPath + router.asPath}
+          onCopy={() => alert("Copied to clipboard!")}
+        >
+          <ContentCopyIcon fontSize="large" />
+        </CopyToClipboard>
       </div>
 
       <div className="relative w-full h-full">

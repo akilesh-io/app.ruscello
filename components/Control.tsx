@@ -88,21 +88,21 @@ const Control = ({
         <h2>Ruscello</h2>
       </div>
       <div className={styles.mid__container}>
-        <div className={styles.icon__btn} onDoubleClick={onRewind}>
+        {/* <div className={styles.icon__btn} onDoubleClick={onRewind}>
           <FastRewind fontSize="medium" />
-        </div>
+        </div> */}
 
         <div className={styles.icon__btn} onClick={onPlayPause}>
           {playing ? (
-            <Pause fontSize="medium" />
+            <Pause fontSize="large" />
           ) : (
-            <PlayArrow fontSize="medium" />
+            <PlayArrow fontSize="large" />
           )}{" "}
         </div>
 
-        <div className={styles.icon__btn}>
+        {/* <div className={styles.icon__btn}>
           <FastForward fontSize="medium" onDoubleClick={onForward} />
-        </div>
+        </div> */}
       </div>
       <div className={styles.bottom__container}>
         <div className={styles.slider__container}>
