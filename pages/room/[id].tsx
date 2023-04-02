@@ -31,12 +31,6 @@ export default function Room() {
   return (
     <Layout>
       <div className="m-2 top-0 left-0">
-        <button
-          onClick={toggleActive}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Toggle
-        </button>
         <CopyToClipboard
           text={fullPath + router.asPath}
           onCopy={() => alert("Copied to clipboard!")}
