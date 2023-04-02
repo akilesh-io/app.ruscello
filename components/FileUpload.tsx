@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { socket } from "@/context/socketUrl";
+import { useRouter } from "next/router";
+
 const Video = dynamic(() => import("./video"));
 
 const FileUpload = () => {
@@ -7,6 +10,8 @@ const FileUpload = () => {
   const [file, setFile] = useState<string | null>(null);
   const [url, setUrl] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
+  const router = useRouter();
+  const { id: roomName } = router.query;
 
   const handleDragEnter = (event) => {
     event.preventDefault();
@@ -45,8 +50,20 @@ const FileUpload = () => {
 
   function handleSearch() {
     setTitle(url);
+    socket.emit("room-video-id", url, { room: roomName });
     //https://youtu.be/dQw4w9WgXcQ
   }
+
+  useEffect(() => {
+    socket.on("room-video-id", (videoId) => {
+      console.log(
+        "🚀 ~ file: FileUpload.tsx:55 ~ socket.on ~ videoId:",
+        videoId
+      );
+      setTitle(videoId);
+    });
+  }, []);
+
   return (
     <div>
       <input type="file" className="hidden" onChange={handleFileChange} />
@@ -54,7 +71,7 @@ const FileUpload = () => {
       {file || title ? (
         <div>
           <div>
-            <Video videoFilePath={file || url} />
+            <Video videoFilePath={file || title} />
           </div>
 
           <button
