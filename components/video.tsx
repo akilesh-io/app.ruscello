@@ -3,13 +3,11 @@
 import React, { useRef, useState } from "react";
 import { useRouter } from 'next/router'
 import { useEffect } from "react";
-import ReactPlayer from "react-player";
+import ReactPlayer from "react-player/lazy";
+
 import { Container } from "@material-ui/core";
-
 import Control from "@/components/Control";
-
 import { formatTime } from "@/components/format";
-
 import styles from "@/styles/Video.module.css";
 import { socket } from "@/context/socketUrl";
 
