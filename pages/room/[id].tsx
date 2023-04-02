@@ -7,8 +7,8 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const FaceTime = dynamic(() => import("@/components/FaceTime"), { ssr: false });
-const FileUpload = dynamic(() => import("@/components/FileUpload"));
-const YTPlayer = dynamic(() => import("@/components/YouTube"));
+//const FileUpload = dynamic(() => import("@/components/FileUpload"));
+//const YTPlayer = dynamic(() => import("@/components/YouTube"));
 
 export default function Room() {
   const router = useRouter();
@@ -48,7 +48,7 @@ export default function Room() {
 
       <div className="relative w-full h-full">
         <div className="absolute top-0 left-0 w-full h-full">
-          {youtube ? <FileUpload /> : <YTPlayer />}
+          {/* {youtube ? <FileUpload /> : <YTPlayer />} */}
         </div>
 
         <FaceTime />

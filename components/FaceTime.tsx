@@ -15,12 +15,20 @@ import VideoCamOff from "@/public/svg/videocam off.svg";
 import CallEnd from "@/public/svg/call end.svg";
 import Call from "@/public/svg/call.svg";
 
+function useForceUpdate() {
+  const [value, setValue] = useState(0); // integer state
+  return () => setValue((value) => value + 1); // update state to force render
+  // A function that increment 👆🏻 the previous state like here
+  // is better than directly setting `setValue(value + 1)`
+}
+
 const FaceTime = () => {
   const router = useRouter();
   const { id: roomName } = router.query;
   const [micActive, setMicActive] = useState(true);
   const [cameraActive, setCameraActive] = useState(true);
-
+  const [reRender, setReRender] = useState(true);
+  const forceUpdate = useForceUpdate();
   // function toggleMic() {
   //   setMicActive((prev) => !prev);
   // }
@@ -62,10 +70,12 @@ const FaceTime = () => {
 
   function muteLocalMic() {
     webRTCAdaptor.muteLocalMic();
+    setMicActive(false);
   }
 
   function unmuteLocalMic() {
     webRTCAdaptor.unmuteLocalMic();
+    setMicActive(true);
   }
 
   //----------------------------------
@@ -98,10 +108,19 @@ const FaceTime = () => {
         console.log("initialized");
       } else if (info == "joined") {
         //joined the stream
+        // chech if the camera is on or off
+        if (webRTCAdaptor.mediaManager.cameraEnabled) {
+          setCameraActive(true);
+          console.log(cameraActive);
+        } else {
+          setCameraActive(false);
+          console.log(cameraActive);
+        }
         console.log("joined");
       } else if (info == "leaved") {
         //leaved the stream
         console.log("leaved");
+        forceUpdate();
       }
     },
     callbackError: function (error) {
@@ -136,13 +155,15 @@ const FaceTime = () => {
       </Draggable>
 
       <div className="flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10">
-        <button onClick={muteLocalMic} type="button">
-          <Image src={MicOff} alt="Mic-off" />
-        </button>
-
-        <button onClick={unmuteLocalMic} type="button">
-          <Image src={Mic} alt="Mic-on" />
-        </button>
+        {micActive ? (
+          <button onClick={muteLocalMic} type="button">
+            <Image src={MicOff} alt="Mic-off" />
+          </button>
+        ) : (
+          <button onClick={unmuteLocalMic} type="button">
+            <Image src={Mic} alt="Mic-on" />
+          </button>
+        )}
 
         <button onClick={leave} type="button">
           <Image src={CallEnd} alt="Call-end" />
@@ -152,13 +173,15 @@ const FaceTime = () => {
           <Image src={Call} alt="Call" />
         </button>
 
-        <button onClick={turnOffLocalCamera} type="button">
-          <Image src={VideoCamOff} alt="Cam-off" />
-        </button>
-
-        <button onClick={turnOnLocalCamera} type="button">
-          <Image src={VideoCam} alt="Cam-on" />
-        </button>
+        {cameraActive ? (
+          <button onClick={turnOffLocalCamera} type="button">
+            <Image src={VideoCamOff} alt="Cam-off" />
+          </button>
+        ) : (
+          <button onClick={turnOnLocalCamera} type="button">
+            <Image src={VideoCam} alt="Cam-on" />
+          </button>
+        )}
       </div>
     </div>
   );
