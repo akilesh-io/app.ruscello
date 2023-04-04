@@ -31,10 +31,7 @@ export default function Room() {
   return (
     <Layout>
       <div className="m-2 top-0 left-0">
-        <CopyToClipboard
-          text={fullPath + router.asPath}
-          onCopy={() => alert("Copied to clipboard!")}
-        >
+        <CopyToClipboard text={fullPath + router.asPath}>
           <ContentCopyIcon fontSize="large" />
         </CopyToClipboard>
       </div>
