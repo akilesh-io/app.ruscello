@@ -53,7 +53,6 @@ const FaceTime = () => {
 
   function leave() {
     socket.emit("leave", roomName); // Let's the server know that user has left the room.
-    socket.disconnect();
     webRTCAdaptor.leave(roomName);
     router.push("/");
   }
