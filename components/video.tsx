@@ -1,9 +1,11 @@
 // create a video player using hls.js than can play local video on drag and drop using tailwindcss and react-dropzone.
 
 import React, { useRef, useState } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import ReactPlayer from "react-player/lazy";
+import screenfull from "screenfull";
+import { findDOMNode } from "react-dom";
 
 import { Container } from "@material-ui/core";
 import Control from "@/components/Control";
@@ -15,12 +17,12 @@ let count = 0;
 
 export default function Video({ videoFilePath }) {
   //const [playing, setPlaying] = useState(false)
-  
+
   const videoPlayerRef = useRef<any>(null);
   const controlRef = useRef<any>(null);
-  const router = useRouter()
+  const router = useRouter();
 
-  const { id: roomName } = router.query
+  const { id: roomName } = router.query;
   const [videoState, setVideoState] = useState({
     playing: false,
     muted: false,
@@ -44,10 +46,9 @@ export default function Video({ videoFilePath }) {
   const formatDuration = formatTime(duration);
 
   const playPauseHandler = () => {
-    //plays and pause the video (toggling)    
+    //plays and pause the video (toggling)
     setVideoState({ ...videoState, playing: !videoState.playing });
-    socket.emit("playPause", playing, {room: roomName});
-
+    socket.emit("playPause", playing, { room: roomName });
   };
 
   const rewindHandler = () => {
@@ -73,18 +74,17 @@ export default function Video({ videoFilePath }) {
       setVideoState({ ...videoState, ...state });
     }
   };
-  
+
   const seekHandler = (e, value) => {
     setVideoState({ ...videoState, played: parseFloat(value) / 100 });
     videoPlayerRef.current.seekTo(parseFloat(value) / 100);
 
-    socket.emit("videoSeek", value, {room: roomName});
+    socket.emit("videoSeek", value, { room: roomName });
 
     //videoState
   };
 
   const seekMouseUpHandler = (e, value) => {
-
     setVideoState({ ...videoState, seeking: false });
     videoPlayerRef.current.seekTo(value / 100);
   };
@@ -138,7 +138,6 @@ export default function Video({ videoFilePath }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const socketInitializer = () => {
-
     socket.on("updatePlayPause", (data) => {
       setVideoState({ ...videoState, playing: !data });
     });
@@ -146,16 +145,24 @@ export default function Video({ videoFilePath }) {
     socket.on("updateSeek", (videoState) => {
       console.log(videoState);
       videoPlayerRef.current.seekTo(parseFloat(videoState) / 100);
-
     });
   };
 
+  const handleClickFullscreen = () => {
+    if (screenfull.isEnabled) {
+      screenfull.toggle(findDOMNode(videoPlayerRef.current));
+    }
+  };
 
   return (
     // <div className="video_container">
     <div className="flex flex-col items-center justify-center w-full min-h-screen py-2">
       <Container maxWidth="md" className="relative">
-        <div className="relative" onMouseMove={mouseMoveHandler}>
+        <div
+          className="relative"
+          onDoubleClick={handleClickFullscreen}
+          onMouseMove={mouseMoveHandler}
+        >
           <ReactPlayer
             className={styles.player}
             ref={videoPlayerRef}

@@ -88,9 +88,9 @@ const Control = ({
         <h2>Ruscello</h2>
       </div>
       <div className={styles.mid__container}>
-        {/* <div className={styles.icon__btn} onDoubleClick={onRewind}>
+        <div className={styles.icon__btn} onDoubleClick={onRewind}>
           <FastRewind fontSize="medium" />
-        </div> */}
+        </div>
 
         <div className={styles.icon__btn} onClick={onPlayPause}>
           {playing ? (
@@ -100,13 +100,13 @@ const Control = ({
           )}{" "}
         </div>
 
-        {/* <div className={styles.icon__btn}>
+        <div className={styles.icon__btn}>
           <FastForward fontSize="medium" onDoubleClick={onForward} />
-        </div> */}
+        </div>
       </div>
       <div className={styles.bottom__container}>
         <div className={styles.slider__container}>
-         <PrettoSlider
+          <PrettoSlider
             min={0}
             max={100}
             value={played * 100}
