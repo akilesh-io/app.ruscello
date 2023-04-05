@@ -21,6 +21,7 @@ export default function Video({ videoFilePath }) {
   const videoPlayerRef = useRef<any>(null);
   const controlRef = useRef<any>(null);
   const router = useRouter();
+  const videoAndControl = useRef<any>(null);
 
   const { id: roomName } = router.query;
   const [videoState, setVideoState] = useState({
@@ -150,14 +151,14 @@ export default function Video({ videoFilePath }) {
 
   const handleClickFullscreen = () => {
     if (screenfull.isEnabled) {
-      screenfull.toggle(findDOMNode(videoPlayerRef.current));
+      screenfull.toggle(videoAndControl.current);
     }
   };
 
   return (
     // <div className="video_container">
     <div className="flex flex-col items-center justify-center w-full min-h-screen py-2">
-      <Container maxWidth="md" className="relative">
+      <Container ref={videoAndControl} maxWidth="md" className="relative">
         <div
           className="relative"
           onDoubleClick={handleClickFullscreen}
