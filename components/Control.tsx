@@ -10,6 +10,9 @@ import {
   VolumeOff,
 } from "@mui/icons-material";
 
+//import Image from "next/image";
+//import FastForward from "@/public/svg/control/fast_forward.svg";
+
 import styles from "@/styles/Control.module.css";
 
 const useStyles = makeStyles({
@@ -102,6 +105,7 @@ const Control = ({
 
         <div className={styles.icon__btn}>
           <FastForward fontSize="medium" onDoubleClick={onForward} />
+          {/* <Image src={FastForward} alt="fast forward" onDoubleClick={onForward} /> */}
         </div>
       </div>
       <div className={styles.bottom__container}>

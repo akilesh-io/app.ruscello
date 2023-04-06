@@ -4,6 +4,5 @@
 }
 
 .draggable {
-  cursor: -webkit-grab;
   cursor: grab;
 }

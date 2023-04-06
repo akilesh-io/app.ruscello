@@ -1,7 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { socket } from "@/context/socketUrl";
 
 type Message = {

@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import ReactPlayer from "react-player/lazy";
 import screenfull from "screenfull";
-import { findDOMNode } from "react-dom";
 
 import { Container } from "@material-ui/core";
 import Control from "@/components/Control";
@@ -16,8 +15,6 @@ import { socket } from "@/context/socketUrl";
 let count = 0;
 
 export default function Video({ videoFilePath }) {
-  //const [playing, setPlaying] = useState(false)
-
   const videoPlayerRef = useRef<any>(null);
   const controlRef = useRef<any>(null);
   const router = useRouter();

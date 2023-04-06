@@ -1,5 +1,3 @@
-// import { Footer } from './Footer';
-// import { Navbar } from './Navbar';
 import Meta from './meta'
 
 type Props = {
