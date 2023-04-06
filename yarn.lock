@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@antmedia/webrtc_adaptor@^2.5.3":
-  version "2.5.3"
-  resolved "https://registry.yarnpkg.com/@antmedia/webrtc_adaptor/-/webrtc_adaptor-2.5.3.tgz#56493d9557f5dda8420dd52c03f8435f0b4fe1d2"
-  integrity sha512-elYBl1LECOoU6DoRjmhGVfPpDF1JNJRVH/fq92n07eswDMyPvDatD4rG+YJ6neh0DNc7vW4L6dhWG0Yx+oyDOg==
-
 "@babel/code-frame@^7.0.0":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.18.6.tgz#3b25d38c89600baa2dcc219edfa88a74eb2c427a"
@@ -2550,7 +2545,7 @@ react-copy-to-clipboard@^5.1.0:
     copy-to-clipboard "^3.3.1"
     prop-types "^15.8.1"
 
-react-dom@18.2.0:
+react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
