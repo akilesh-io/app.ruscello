@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import ReactPlayer from "react-player/lazy";
 import screenfull from "screenfull";
 
-import { Container } from "@material-ui/core";
 import Control from "@/components/Control";
 import { formatTime } from "@/components/format";
 import styles from "@/styles/Video.module.css";
@@ -94,6 +93,7 @@ export default function Video({ videoFilePath }) {
       ...videoState,
       volume: newVolume,
       muted: Number(newVolume) === 0 ? true : false, // volume === 0 then muted
+      //muted: newVolume === 0 ? true : false,
     });
   };
 
@@ -155,7 +155,7 @@ export default function Video({ videoFilePath }) {
   return (
     // <div className="video_container">
     <div className="flex flex-col items-center justify-center w-full min-h-screen py-2">
-      <Container ref={videoAndControl} maxWidth="md" className="relative">
+      <div ref={videoAndControl} className="relative">
         <div
           className="relative"
           onDoubleClick={handleClickFullscreen}
@@ -176,7 +176,6 @@ export default function Video({ videoFilePath }) {
           />
 
           <Control
-            controlRef={controlRef}
             onPlayPause={playPauseHandler}
             playing={playing}
             onRewind={rewindHandler}
@@ -184,17 +183,18 @@ export default function Video({ videoFilePath }) {
             played={played}
             onSeek={seekHandler}
             onSeekMouseUp={seekMouseUpHandler}
-            volume={volume}
             onVolumeChangeHandler={volumeChangeHandler}
             onVolumeSeekUp={volumeSeekUpHandler}
+            volume={volume}
             mute={muted}
             onMute={muteHandler}
             duration={formatDuration}
             currentTime={formatCurrentTime}
             onMouseSeekDown={onSeekMouseDownHandler}
+            controlRef={controlRef}
           />
         </div>
-      </Container>
+      </div>
     </div>
   );
 }
