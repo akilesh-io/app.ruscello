@@ -18,3 +18,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 * React Video controler:
 https://code.pieces.app/blog/react-player-customized-controls
+
+* Responsive aspect ratio:
+https://www.w3schools.com/howto/howto_css_responsive_iframes.asp
+
+* customize MUI theme
+https://mui.com/material-ui/customization/how-to-customize/
