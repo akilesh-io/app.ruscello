@@ -1,16 +1,19 @@
 import Layout from "@/components/layout";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { socket } from "@/context/socketUrl";
 import { useRouter } from "next/router";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import screenfull from "screenfull";
 
 const FaceTime = dynamic(() => import("@/components/FaceTime"), { ssr: false });
 const FileUpload = dynamic(() => import("@/components/FileUpload"));
 
 export default function Room() {
   const router = useRouter();
+  const videoAndFace = useRef<any>(null);
+  const videoAlone = useRef<any>(null);
 
   const fullPath =
     typeof window !== "undefined" && window.location.origin
@@ -18,14 +21,21 @@ export default function Room() {
       : "https://app-ruscello.vercel.app";
 
   const { id: roomName } = router.query;
-  const [youtube, youtubeActive] = useState(true);
 
   useEffect(() => {
     socket.emit("join", { room: roomName, socketId: socket.io.engine.id });
   }, [roomName]);
 
-  function toggleActive() {
-    youtubeActive((prev) => !prev);
+  function callVideoAndFace() {
+    if (screenfull.isEnabled) {
+      screenfull.toggle(videoAndFace.current);
+    }
+  }
+
+  function callVideoAlone() {
+    if (screenfull.isEnabled) {
+      screenfull.toggle(videoAlone.current);
+    }
   }
 
   return (
@@ -35,14 +45,12 @@ export default function Room() {
           <ContentCopyIcon fontSize="large" />
         </CopyToClipboard>
       </div>
-
-      <div className="relative w-full h-full">
-        <div className="absolute top-0 left-0 w-full h-full">
-          <FileUpload />
+        <div className="relative w-full h-full" ref={videoAndFace}>
+          <div className="absolute top-0 left-0 w-full h-full" ref={videoAlone}>
+            <FileUpload />
+          </div>
+          <FaceTime />
         </div>
-
-        <FaceTime />
-      </div>
     </Layout>
   );
 }
