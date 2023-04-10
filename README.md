@@ -24,3 +24,7 @@ https://www.w3schools.com/howto/howto_css_responsive_iframes.asp
 
 * customize MUI theme
 https://mui.com/material-ui/customization/how-to-customize/
+
+* Full screen both video and face-time
+http://jsfiddle.net/zrxewhgL/
+http://jsfiddle.net/j40s2bvd/
