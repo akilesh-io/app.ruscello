@@ -27,10 +27,11 @@ export default function Video({ videoFilePath }) {
     played: 0,
     seeking: false,
     buffer: true,
+    fullScreen: false,
   });
 
   //Destructuring the properties from the videoState
-  const { playing, muted, volume, played, seeking, buffer } = videoState;
+  const { playing, muted, volume, played, seeking, fullScreen } = videoState;
 
   const currentTime = videoPlayerRef.current
     ? videoPlayerRef.current.getCurrentTime()
@@ -146,23 +147,25 @@ export default function Video({ videoFilePath }) {
     });
   };
 
-  const handleClickFullscreen = () => {
+  function handleClickFullscreen() {
     if (screenfull.isEnabled) {
-      screenfull.toggle(videoAndControl.current);
+      setVideoState({ ...videoState, fullScreen: !videoState.fullScreen });
     }
-  };
+    screenfull.toggle(videoAndControl.current);
+  }
+
 
   return (
     // <div className="video_container">
-    <div className="flex flex-col items-center justify-center w-full min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center w-full h-full py-2">
       <div ref={videoAndControl} className="relative">
         <div
           className="relative"
-          onDoubleClick={handleClickFullscreen}
+          //onDoubleClick={handleClickFullscreen}
           onMouseMove={mouseMoveHandler}
         >
           <ReactPlayer
-            className={styles.player}
+            className="object-cover p-0 m-0 pointer-events-none"
             ref={videoPlayerRef}
             url={videoFilePath}
             width="100%"
@@ -191,6 +194,8 @@ export default function Video({ videoFilePath }) {
             duration={formatDuration}
             currentTime={formatCurrentTime}
             onMouseSeekDown={onSeekMouseDownHandler}
+            fullScreen={fullScreen}
+            handleClickFullscreen={handleClickFullscreen}
             controlRef={controlRef}
           />
         </div>
