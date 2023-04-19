@@ -90,10 +90,6 @@ export default function FaceTime() {
           call.on("stream", (remoteStream) => {
             // Show stream in some video/canvas element.
             renderVideo.current.srcObject = remoteStream;
-            setVideoSources([
-              ...videoSources,
-              { id: userId, stream: remoteStream },
-            ]);
           });
         })
         .catch((err) => {
@@ -103,18 +99,10 @@ export default function FaceTime() {
 
       call.on("stream", (userVideoStream) => {
         console.log("received new user");
-        setVideoSources([
-          ...videoSources,
-          { id: userId, stream: userVideoStream },
-        ]);
       });
 
       // If they leave, remove their video (doesn't work)
       call.on("close", () => {
-        setVideoSources((videoSources) =>
-          videoSources.filter((a) => a.id !== userId)
-        );
-
         //  If the call gives an error
         call.on("error", (err) => {
           console.log(err);
@@ -124,10 +112,6 @@ export default function FaceTime() {
 
     // If a user disconnect
     socket.on("user-disconnected", (userId) => {
-      setVideoSources((videoSources) =>
-        videoSources.filter((a) => a.id !== userId)
-      );
-
       renderVideo.current.srcObject = null;
     });
 
