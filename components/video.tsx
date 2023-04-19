@@ -154,13 +154,11 @@ export default function Video({ videoFilePath }) {
     screenfull.toggle(videoAndControl.current);
   }
 
-
   return (
-    // <div className="video_container">
     <div className="flex flex-col items-center justify-center w-full h-full py-2">
       <div ref={videoAndControl} className="relative">
         <div
-          className="relative"
+          className="w-full h-full"
           //onDoubleClick={handleClickFullscreen}
           onMouseMove={mouseMoveHandler}
         >
@@ -178,26 +176,28 @@ export default function Video({ videoFilePath }) {
             onBufferEnd={bufferEndHandler}
           />
 
-          <Control
-            onPlayPause={playPauseHandler}
-            playing={playing}
-            onRewind={rewindHandler}
-            onForward={handleFastFoward}
-            played={played}
-            onSeek={seekHandler}
-            onSeekMouseUp={seekMouseUpHandler}
-            onVolumeChangeHandler={volumeChangeHandler}
-            onVolumeSeekUp={volumeSeekUpHandler}
-            volume={volume}
-            mute={muted}
-            onMute={muteHandler}
-            duration={formatDuration}
-            currentTime={formatCurrentTime}
-            onMouseSeekDown={onSeekMouseDownHandler}
-            fullScreen={fullScreen}
-            handleClickFullscreen={handleClickFullscreen}
-            controlRef={controlRef}
-          />
+          <div className="object-cover p-0 m-0">
+            <Control
+              onPlayPause={playPauseHandler}
+              playing={playing}
+              onRewind={rewindHandler}
+              onForward={handleFastFoward}
+              played={played}
+              onSeek={seekHandler}
+              onSeekMouseUp={seekMouseUpHandler}
+              onVolumeChangeHandler={volumeChangeHandler}
+              onVolumeSeekUp={volumeSeekUpHandler}
+              volume={volume}
+              mute={muted}
+              onMute={muteHandler}
+              duration={formatDuration}
+              currentTime={formatCurrentTime}
+              onMouseSeekDown={onSeekMouseDownHandler}
+              fullScreen={fullScreen}
+              handleClickFullscreen={handleClickFullscreen}
+              controlRef={controlRef}
+            />
+          </div>
         </div>
       </div>
     </div>

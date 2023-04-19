@@ -45,8 +45,8 @@ export default function Room() {
           <ContentCopyIcon fontSize="large" />
         </CopyToClipboard>
       </div>
-        <div className="relative w-full h-full" ref={videoAndFace}>
-          <div className="absolute top-0 left-0 w-full h-full" ref={videoAlone}>
+        <div className="w-full h-full" ref={videoAndFace}>
+          <div className="top-0 left-0 w-full h-full" ref={videoAlone}>
             <FileUpload />
           </div>
           <FaceTime />
