@@ -5,12 +5,11 @@ import { socket } from "@/context/socketUrl";
 import { Peer } from "peerjs";
 
 import Draggable from "react-draggable";
-
-import Mic from "@/public/svg/mic.svg";
-import MicOff from "@/public/svg/mic off.svg";
-import VideoCam from "@/public/svg/videocam.svg";
-import VideoCamOff from "@/public/svg/videocam off.svg";
-import CallEnd from "@/public/svg/call end.svg";
+import MicIcon from "@mui/icons-material/Mic";
+import MicOffIcon from "@mui/icons-material/MicOff";
+import VideocamIcon from "@mui/icons-material/Videocam";
+import VideocamOffIcon from "@mui/icons-material/VideocamOff";
+import CallEndIcon from "@mui/icons-material/CallEnd";
 
 export default function FaceTime() {
   const router = useRouter();
@@ -149,15 +148,12 @@ export default function FaceTime() {
     if (userVideoRef.current.srcObject) {
       userVideoRef.current.srcObject.getTracks().forEach((track) => {
         track.stop();
+        //window.location.reload();
       });
     }
 
     socket.emit("leaveRoom", roomName);
     peer.disconnect();
-    window.location.reload();
-    home();
-  }
-  function home() {
     router.push("/");
   }
 
@@ -184,21 +180,29 @@ export default function FaceTime() {
         </Draggable>
       </div>
       <div className="flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10">
-        <button onClick={toggleMic} type="button">
+        <button
+          onClick={toggleMic}
+          type="button"
+          className="text-white bg-gradient-to-br from-teal-300  to-lime-300  hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+        >
           {micActive ? (
-            <Image src={Mic} alt="Mic-on" />
+            <MicIcon className="text-black" fontSize="medium" />
           ) : (
-            <Image src={MicOff} alt="Mic-off" />
+            <MicOffIcon className="text-black" fontSize="medium" />
           )}
         </button>
         <button onClick={leave} type="button">
-          <Image src={CallEnd} alt="Call-end" />
+          <CallEndIcon className="text-secondary" fontSize="large" />
         </button>
-        <button onClick={toggleCamera} type="button">
+        <button
+          className="text-white bg-gradient-to-br from-teal-300  to-lime-300  hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          onClick={toggleCamera}
+          type="button"
+        >
           {cameraActive ? (
-            <Image src={VideoCam} alt="Cam-on" />
+            <VideocamIcon className="text-black" fontSize="medium" />
           ) : (
-            <Image src={VideoCamOff} alt="Cam-off" />
+            <VideocamOffIcon className="text-black" fontSize="medium" />
           )}
         </button>
       </div>
