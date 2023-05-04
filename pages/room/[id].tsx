@@ -34,11 +34,11 @@ export default function Room() {
 
   return (
     <Layout>
-      <CopyUrl />
       <div className="w-full h-full" ref={videoAndFace}>
         <div className="top-0 left-0 w-full h-full" ref={videoAlone}>
           <FileUpload />
         </div>
+        <CopyUrl />
         <FaceTime />
       </div>
     </Layout>
