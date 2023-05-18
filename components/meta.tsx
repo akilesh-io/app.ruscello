@@ -5,17 +5,17 @@ export default function Meta() {
     <>
       <Script
         async
-        src="https://www.googletagmanager.com/gtag/js?id=G-6ZVPLRHTGQ"
+        src="https://scripts.simpleanalyticscdn.com/latest.js"
         strategy="afterInteractive"
       ></Script>
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-6ZVPLRHTGQ');
-        `}
-      </Script>
+      <noscript>
+        {/* eslint-disable @next/next/no-img-element */}
+        <img
+          src="https://queue.simpleanalyticscdn.com/noscript.gif"
+          alt=""
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </noscript>
     </>
   )
 }
