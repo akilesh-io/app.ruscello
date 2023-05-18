@@ -28,3 +28,9 @@ https://mui.com/material-ui/customization/how-to-customize/
 * Full screen both video and face-time
 http://jsfiddle.net/zrxewhgL/
 http://jsfiddle.net/j40s2bvd/
+
+### It Is Wt It Is:
+
+[![DeepSource](https://app.deepsource.com/gh/Akilesh2112/app.ruscello.svg/?label=active+issues&show_trend=true&token=tlXXVZoDXwFhc09fMmX-eT9s)](https://app.deepsource.com/gh/Akilesh2112/app.ruscello/?ref=repository-badge)
+
+[![DeepSource](https://app.deepsource.com/gh/Akilesh2112/app.ruscello.svg/?label=resolved+issues&show_trend=true&token=tlXXVZoDXwFhc09fMmX-eT9s)](https://app.deepsource.com/gh/Akilesh2112/app.ruscello/?ref=repository-badge)
