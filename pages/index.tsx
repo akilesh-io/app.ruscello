@@ -22,7 +22,7 @@ export default function Home() {
         <Head>
           <title>Ruscello</title>
           <meta name="description" content="Discover a captivating movie-watching experience with Filmingo. Watch and enjoy films together with friends in real-time, creating lasting memories. Explore a vast library of films, sync up with loved ones, and immerse yourself in the world of cinematic entertainment like never before." />
-          <link rel="icon" href="/favicon.png" />
+          <link rel="icon" href="https://res.cloudinary.com/davkfrmah/image/upload/v1684239381/My%20Brand/flamingo_ydhdcy.png" />
         </Head>
 
         <form className="flex flex-col justify-center" onSubmit={joinRoom}>
