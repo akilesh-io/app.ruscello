@@ -21,7 +21,7 @@ export default function Home() {
       <Layout>
         <Head>
           <title>Ruscello</title>
-          <meta name="description" content="Hello There :)" />
+          <meta name="description" content="Discover a captivating movie-watching experience with Filmingo. Watch and enjoy films together with friends in real-time, creating lasting memories. Explore a vast library of films, sync up with loved ones, and immerse yourself in the world of cinematic entertainment like never before." />
           <link rel="icon" href="/favicon.png" />
         </Head>
 
