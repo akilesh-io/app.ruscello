@@ -33,7 +33,6 @@ const Control = ({
   handleClickFullscreen,
   controlRef,
 }) => {
-
   return (
     <div className={styles.control_Container} ref={controlRef}>
       <div className={styles.top_container}>
@@ -59,6 +58,7 @@ const Control = ({
       <div className={styles.bottom__container}>
         <div className={styles.slider__container}>
           <Slider
+            className={styles.seekSlider}
             min={0}
             max={100}
             value={played * 100}
