@@ -113,13 +113,17 @@ const FileUpload = () => {
                 Search
               </button>
             </div>
-          </div>
+            {/* dive thm by a or */}
+            <div className="flex items-center justify-center">
+            <p className="text-gray-700 mb-2 pl-2">or</p>
+            </div>
           <button
-            className="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute z-10"
+            className="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={handleClick}
           >
             Select file
           </button>
+          </div>
         </div>
       ) : (
         <div className="p-2">
