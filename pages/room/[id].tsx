@@ -5,6 +5,7 @@ import { socket } from "@/context/socketUrl";
 import { useRouter } from "next/router";
 import screenfull from "screenfull";
 import CopyUrl from "@/components/CopyUrl";
+import FeedbackModal from "@/components/Feedback";
 
 const FaceTime = dynamic(() => import("@/components/FaceTime"), { ssr: false });
 const FileUpload = dynamic(() => import("@/components/FileUpload"));
@@ -34,12 +35,15 @@ export default function Room() {
 
   return (
     <Layout>
-      <div className="w-full h-full" ref={videoAndFace}>
-        <div className="top-0 left-0 w-full h-full" ref={videoAlone}>
-          <FileUpload />
+      <FeedbackModal />
+      <div>
+        <div className="w-full h-full" ref={videoAndFace}>
+          <div className="top-0 left-0 w-full h-full" ref={videoAlone}>
+            <FileUpload />
+          </div>
+          <CopyUrl />
+          <FaceTime />
         </div>
-        <CopyUrl />
-        <FaceTime />
       </div>
     </Layout>
   );
