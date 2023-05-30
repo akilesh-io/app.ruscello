@@ -1,9 +1,9 @@
 import { io } from "socket.io-client";
 
-// https://ruscello-api-ecfbf.ondigitalocean.app/
+// https://oyster-app-s6lgs.ondigitalocean.app/
 // http://localhost:5000/
 
-const URL = "https://ruscello-api-ecfbf.ondigitalocean.app/";
+const URL = "https://oyster-app-s6lgs.ondigitalocean.app/";
 
 export const socket = io(URL, {
     reconnectionDelay: 1000,
