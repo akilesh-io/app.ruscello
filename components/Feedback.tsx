@@ -24,7 +24,8 @@ const FeedbackModal = () => {
       ></Script>
       <button
         id="feedback-button"
-        className="border-2 border-black rounded-md px-4 py-2 text-black font-medium hover:bg-gray-200 hover:text-black transition-all invisible "
+        // align top-right
+        className="border-2 border-black rounded-md px-4 py-2 text-black font-medium hover:bg-gray-200 hover:text-black transition-all fixed top-4 right-4 z-50"
         data-tf-popup="Kjk8omIg"
         data-tf-opacity="100"
         data-tf-iframe-props="title=Filmingo"
