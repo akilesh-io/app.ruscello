@@ -38,7 +38,7 @@ export default function Room() {
       <FeedbackModal />
       <div>
         <div className="w-full h-full" ref={videoAndFace}>
-          <div className="top-0 left-0 w-full h-full" ref={videoAlone}>
+          <div className="top-0 left-0" ref={videoAlone}>
             <FileUpload />
           </div>
           <CopyUrl />
