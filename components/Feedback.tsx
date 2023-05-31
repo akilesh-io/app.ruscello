@@ -5,10 +5,6 @@ const FeedbackModal = () => {
   useEffect(() => {
     const popupShown = localStorage.getItem("popupShown");
     //localStorage.clear();
-    console.log(
-      "🚀 ~ file: Feedback.tsx:7 ~ useEffect ~ popupShown:",
-      popupShown
-    );
     const feedbackButton = document.getElementById("feedback-button");
     setTimeout(() => {
       if (!popupShown) {
