@@ -5,7 +5,10 @@ const FeedbackModal = () => {
   useEffect(() => {
     const popupShown = localStorage.getItem("popupShown");
     //localStorage.clear();
-    console.log("🚀 ~ file: Feedback.tsx:7 ~ useEffect ~ popupShown:", popupShown)
+    console.log(
+      "🚀 ~ file: Feedback.tsx:7 ~ useEffect ~ popupShown:",
+      popupShown
+    );
     const feedbackButton = document.getElementById("feedback-button");
     setTimeout(() => {
       if (!popupShown) {
@@ -39,25 +42,3 @@ const FeedbackModal = () => {
 };
 
 export default FeedbackModal;
-
-// export const FeedbackModal = () => (
-//   // align top-right
-//   <div>
-//     <Script
-//       async
-//       src="//embed.typeform.com/next/embed.js"
-//       strategy="afterInteractive"
-//     ></Script>
-//     <button
-//       id="feedback-button"
-//       className="border-2 border-black rounded-md px-4 py-2 text-black font-medium hover:bg-gray-200 hover:text-black transition-all"
-//       data-tf-popup="Kjk8omIg"
-//       data-tf-opacity="100"
-//       data-tf-iframe-props="title=Filmingo"
-//       data-tf-transitive-search-params
-//       data-tf-medium="snippet"
-//     >
-//       Feedback
-//     </button>
-//   </div>
-// );

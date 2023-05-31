@@ -46,6 +46,7 @@
 }
 
 .span {
+  flex-shrink: 0;
   color: #fff;
   font-size: 0.8rem;
   margin-left: 20px;
@@ -64,15 +65,6 @@ Use these three colors for the controls
 #D97777
 
 */
-
-.volumeSlider {
-  width: 5rem;
-  color: #D97777;
-}
-
-.seekSlider {
-  color: #D97777;
-}
 
 .icon__btn {
   padding: 0 10px;

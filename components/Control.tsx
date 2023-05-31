@@ -58,7 +58,7 @@ const Control = ({
       <div className={styles.bottom__container}>
         <div className={styles.slider__container}>
           <Slider
-            className={styles.seekSlider}
+            className="text-secondaryLight"
             min={0}
             max={100}
             value={played * 100}
@@ -89,13 +89,12 @@ const Control = ({
               )}
             </div>
 
-            <Slider
-              className={styles.volumeSlider}
-              onChange={onVolumeChangeHandler}
-              value={volume * 100}
-              onChangeCommitted={onVolumeSeekUp}
-            />
-
+              <Slider
+                className="hidden md:block text-secondaryLight w-20"
+                onChange={onVolumeChangeHandler}
+                value={volume * 100}
+                onChangeCommitted={onVolumeSeekUp}
+              />
             <span className={styles.span}>
               {currentTime} : {duration}
             </span>
