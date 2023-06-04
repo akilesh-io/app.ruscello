@@ -36,7 +36,7 @@ const Control = ({
   return (
     <div className={styles.control_Container} ref={controlRef}>
       <div className={styles.top_container}>
-        <h2>Ruscello</h2>
+        <h2>Filmingo</h2>
       </div>
       <div className={styles.mid__container}>
         <div className={styles.icon__btn} onDoubleClick={onRewind}>
@@ -58,7 +58,9 @@ const Control = ({
       <div className={styles.bottom__container}>
         <div className={styles.slider__container}>
           <Slider
-            className="text-secondaryLight"
+            sx={{
+              color: "#D97777",
+            }}
             min={0}
             max={100}
             value={played * 100}
@@ -89,12 +91,16 @@ const Control = ({
               )}
             </div>
 
-              <Slider
-                className="hidden md:block text-secondaryLight w-20"
-                onChange={onVolumeChangeHandler}
-                value={volume * 100}
-                onChangeCommitted={onVolumeSeekUp}
-              />
+            <Slider
+              sx={{
+                color: "#D97777",
+                display: { xs: "none", md: "block" },
+                width: "5rem",
+              }}
+              onChange={onVolumeChangeHandler}
+              value={volume * 100}
+              onChangeCommitted={onVolumeSeekUp}
+            />
             <span className={styles.span}>
               {currentTime} : {duration}
             </span>
