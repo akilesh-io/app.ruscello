@@ -37,13 +37,13 @@ export default function Room() {
     <Layout>
       <FeedbackModal />
       <div>
-        <div className="w-full h-full" ref={videoAndFace}>
-          <div className="top-0 left-0" ref={videoAlone}>
+        <div className="w-full h-full relative z-10" ref={videoAndFace}>
+          <div ref={videoAlone}>
             <FileUpload />
           </div>
           <CopyUrl />
-          <FaceTime />
         </div>
+        <FaceTime />
       </div>
     </Layout>
   );

@@ -18,14 +18,18 @@ export default function FaceTime() {
   const [cameraActive, setCameraActive] = useState(true);
   const renderVideo = useRef<any>(null);
   const userVideoRef = useRef<any>();
-  const [videoSources, setVideoSources] = useState([]);
+  const [videoSources, setVideoSources] = useState<any>([]);
   //let myVideoStream = { id: socket.id, stream: userVideoRef.current.srcObject };
 
-  const peer = new Peer();
+  const peer = new Peer("someid", {
+    host: "localhost",    
+    port: 5000,
+    path: "/peerjs",
+  });
 
   // get user media
   useEffect(() => {
-    const getUserMedia = async () => {
+    const userMedia = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: true,
@@ -36,7 +40,7 @@ export default function FaceTime() {
         console.log("Failed to get local stream" + err);
       }
     };
-    getUserMedia();
+    userMedia();
 
     peer.on("open", (id) => {
       //console.log("My peer ID is: " + id);
@@ -59,17 +63,17 @@ export default function FaceTime() {
           // Answer the call with an A/V stream.
           call.answer(remoteStream);
           call.on("stream", (remoteStream) => {
-            // setVideoSources((videoSources) => {
-            //   if (!videoSources.some((e) => e.id === call.peer)) {
-            //     return [
-            //       ...videoSources,
-            //       { id: call.peer, stream: remoteStream },
-            //     ];
-            //   } else {
-            //     return videoSources;
-            //   }
-            // });
-            // Show stream in some video/canvas element.
+            setVideoSources((videoSources) => {
+              if (!videoSources.some((e) => e.id === call.peer)) {
+                return [
+                  ...videoSources,
+                  { id: call.peer, stream: remoteStream },
+                ];
+              } else {
+                return videoSources;
+              }
+            });
+          //  Show stream in some video/canvas element.
             renderVideo.current.srcObject = remoteStream;
           });
         } catch (err) {
@@ -82,23 +86,23 @@ export default function FaceTime() {
     socket.on("user-connected", (userId) => {
       // Call the new user
       const call = peer.call(userId, userVideoRef.current.srcObject);
-      navigator.mediaDevices
-        .getUserMedia({ video: true, audio: true })
-        .then((stream) => {
-          let call = peer.call(userId, stream);
-          call.on("stream", (remoteStream) => {
-            // Show stream in some video/canvas element.
-            renderVideo.current.srcObject = remoteStream;
-          });
-        })
-        .catch((err) => {
-          console.log("Failed to get local stream", err);
-        });
-      console.log("user connected");
 
-      call.on("stream", (userVideoStream) => {
-        console.log("received new user");
+      // When they answer, add their video
+      call.on("stream", (remoteStream) => {
+         setVideoSources((videoSources) => {
+            if (!videoSources.some((e) => e.id === userId)) {
+              return [
+                ...videoSources,
+                { id: userId, stream: remoteStream },
+              ];
+            } else {
+              return videoSources;
+            }
+          });
+        renderVideo.current.srcObject = remoteStream;
       });
+
+      
 
       // If they leave, remove their video (doesn't work)
       call.on("close", () => {
@@ -158,10 +162,9 @@ export default function FaceTime() {
   }
 
   return (
-    <div>
-      <div className="h-screen p-2 z-50">
-        <Draggable bounds="parent">
-          <div className="cursor-grab flex flex-col justify-end items-end fixed bottom-2 right-4 space-y-10">
+    <div className="h-screen absolute inset-0 p-2">
+        <Draggable bounds="parent" defaultClassName="z-20">
+          <div className="cursor-grab flex flex-col justify-end items-end fixed bottom-8 right-4 space-y-10">
             <div className="flex flex-row ">
               <video
                 ref={userVideoRef}
@@ -178,7 +181,6 @@ export default function FaceTime() {
             </div>
           </div>
         </Draggable>
-      </div>
       <div className="flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10">
         <button
           onClick={toggleMic}

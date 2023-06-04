@@ -8,7 +8,6 @@ import screenfull from "screenfull";
 
 import Control from "@/components/Control";
 import { formatTime } from "@/components/format";
-import styles from "@/styles/Video.module.css";
 import { socket } from "@/context/socketUrl";
 
 let count = 0;
@@ -155,10 +154,10 @@ export default function Video({ videoFilePath }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full py-2">
+    <div className="flex flex-col items-center justify-center py-2">
       <div ref={videoAndControl} className="relative">
         <div
-          className="w-full h-full"
+          className="md:max-w-screen-lg xl:max-w-screen-lg 2xl:max-w-screen-xl h-full"
           //onDoubleClick={handleClickFullscreen}
           onMouseMove={mouseMoveHandler}
         >
