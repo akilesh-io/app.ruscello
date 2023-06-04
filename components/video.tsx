@@ -154,7 +154,7 @@ export default function Video({ videoFilePath }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center py-2">
+    <div className="flex flex-col items-center justify-center w-full h-full py-2">
       <div ref={videoAndControl} className="relative">
         <div
           className="md:max-w-screen-lg xl:max-w-screen-lg 2xl:max-w-screen-xl h-full"
