@@ -161,8 +161,8 @@ export default function Video({ videoFilePath }) {
           //onDoubleClick={handleClickFullscreen}
           onMouseMove={mouseMoveHandler}
         >
-          <ReactPlayer
-            className="object-cover p-0 m-0 pointer-events-none"
+          <div className="object-cover p-0 m-0 pointer-events-none">
+          <ReactPlayer            
             ref={videoPlayerRef}
             url={videoFilePath}
             width="100%"
@@ -174,6 +174,7 @@ export default function Video({ videoFilePath }) {
             onBuffer={bufferStartHandler}
             onBufferEnd={bufferEndHandler}
           />
+          </div>
 
           <div className="object-cover p-0 m-0">
             <Control
