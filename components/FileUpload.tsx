@@ -50,15 +50,12 @@ const FileUpload = () => {
 
   function handleSearch() {
     setTitle(url);
+    console.log("🚀 ~ file: FileUpload.tsx:53 ~ handleSearch ~ url:", url);
     socket.emit("room-video-id", url, { room: roomName });
   }
 
   useEffect(() => {
     socket.on("room-video-id", (videoId) => {
-      console.log(
-        "🚀 ~ file: FileUpload.tsx:55 ~ socket.on ~ videoId:",
-        videoId
-      );
       setTitle(videoId);
     });
   }, []);
@@ -74,12 +71,6 @@ const FileUpload = () => {
           </div>
 
           <div className="flex p-3">
-            <label
-              htmlFor="search"
-              className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-            >
-              Search
-            </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
@@ -110,19 +101,19 @@ const FileUpload = () => {
                 className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={handleSearch}
               >
-                Search
+                Search 2
               </button>
             </div>
             {/* dive thm by a or */}
             <div className="flex items-center justify-center">
-            <p className="text-gray-700 mb-2 pl-2">or</p>
+              <p className="text-gray-700 mb-2 pl-2">or</p>
             </div>
-          <button
-            className="ml-3 shrink-0  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={handleClick}
-          >
-            Select file
-          </button>
+            <button
+              className="ml-3 shrink-0  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleClick}
+            >
+              Select file
+            </button>
           </div>
         </div>
       ) : (
@@ -150,12 +141,6 @@ const FileUpload = () => {
                   Select file
                 </button>
                 <div className="mt-2">
-                  <label
-                    htmlFor="search"
-                    className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-                  >
-                    Search
-                  </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <svg
@@ -187,7 +172,7 @@ const FileUpload = () => {
                       className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       onClick={handleSearch}
                     >
-                      Search
+                      Search 1
                     </button>
                   </div>
                 </div>
