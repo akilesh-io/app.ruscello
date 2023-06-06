@@ -21,12 +21,9 @@ export default function FaceTime() {
   const [videoSources, setVideoSources] = useState<any>([]);
   //let myVideoStream = { id: socket.id, stream: userVideoRef.current.srcObject };
 
-  const peer = new Peer("someid", {
-    host: "localhost",    
-    port: 5000,
-    path: "/peerjs",
-  });
+  const peer = new Peer();
 
+  
   // get user media
   useEffect(() => {
     const userMedia = async () => {
@@ -73,7 +70,7 @@ export default function FaceTime() {
                 return videoSources;
               }
             });
-          //  Show stream in some video/canvas element.
+            //  Show stream in some video/canvas element.
             renderVideo.current.srcObject = remoteStream;
           });
         } catch (err) {
@@ -89,20 +86,15 @@ export default function FaceTime() {
 
       // When they answer, add their video
       call.on("stream", (remoteStream) => {
-         setVideoSources((videoSources) => {
-            if (!videoSources.some((e) => e.id === userId)) {
-              return [
-                ...videoSources,
-                { id: userId, stream: remoteStream },
-              ];
-            } else {
-              return videoSources;
-            }
-          });
+        setVideoSources((videoSources) => {
+          if (!videoSources.some((e) => e.id === userId)) {
+            return [...videoSources, { id: userId, stream: remoteStream }];
+          } else {
+            return videoSources;
+          }
+        });
         renderVideo.current.srcObject = remoteStream;
       });
-
-      
 
       // If they leave, remove their video (doesn't work)
       call.on("close", () => {
@@ -148,39 +140,39 @@ export default function FaceTime() {
     }
   };
 
-  function leave() {
+  async function leave() {
     if (userVideoRef.current.srcObject) {
-      userVideoRef.current.srcObject.getTracks().forEach((track) => {
+      await userVideoRef.current.srcObject.getTracks().forEach((track) => {
+        console.log("before", track);
         track.stop();
-        //window.location.reload();
+        console.log("after", track);
       });
     }
-
     socket.emit("leaveRoom", roomName);
     peer.disconnect();
-    router.push("/");
+    await router.push("/");
   }
 
   return (
     <div className="h-screen p-2">
-        <Draggable bounds="parent" defaultClassName="z-20">
-          <div className="cursor-grab flex flex-col justify-end items-end fixed bottom-16 right-4 space-y-10">
-            <div className="flex flex-row ">
-              <video
-                ref={userVideoRef}
-                className="w-40 bg-blue-100 rounded border-blue-400 mr-2"
-                autoPlay
-                muted
-              />
+      <Draggable bounds="parent" defaultClassName="z-20">
+        <div className="cursor-grab flex flex-col justify-end items-end fixed bottom-16 right-4 space-y-10">
+          <div className="flex flex-row ">
+            <video
+              ref={userVideoRef}
+              className="w-40 bg-blue-100 rounded border-blue-400 mr-2"
+              autoPlay
+              muted
+            />
 
-              <video
-                ref={renderVideo}
-                className="w-40 bg-green-100 rounded border-green-400"
-                autoPlay
-              />
-            </div>
+            <video
+              ref={renderVideo}
+              className="w-40 bg-green-100 rounded border-green-400"
+              autoPlay
+            />
           </div>
-        </Draggable>
+        </div>
+      </Draggable>
       <div className="flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10 z-20">
         <button
           onClick={toggleMic}
