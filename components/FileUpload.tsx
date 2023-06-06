@@ -67,7 +67,6 @@ const FileUpload = () => {
       {file || title ? (
         <div>
           <div>
-            <p>{file || title}</p>
             <Video videoFilePath={file || title} />
           </div>
 
