@@ -21,12 +21,9 @@ export default function FaceTime() {
   const [videoSources, setVideoSources] = useState<any>([]);
   //let myVideoStream = { id: socket.id, stream: userVideoRef.current.srcObject };
 
-  const peer = new Peer("someid", {
-    host: "localhost",
-    port: 5000,
-    path: "/peerjs",
-  });
+  const peer = new Peer();
 
+  
   // get user media
   useEffect(() => {
     const userMedia = async () => {
