@@ -21,9 +21,26 @@ export default function FaceTime() {
   const [videoSources, setVideoSources] = useState<any>([]);
   //let myVideoStream = { id: socket.id, stream: userVideoRef.current.srcObject };
 
-  const peer = new Peer();
+  const peer = new Peer({
+    host: "api.filmingo.us",
+    secure: true,
+    port: 443,
+    path: "/peerjs",
+    config: {
+      iceServers: [
+        { url: "stun:stun01.sipphone.com" },
+        { url: "stun:stun.ekiga.net" },
+        { url: "stun:stunserver.org" },
+        { url: "stun:stun.softjoys.com" },
+        { url: "stun:stun.voiparound.com" },
+        { url: "stun:stun.voipbuster.com" },
+        { url: "stun:stun.voipstunt.com" },
+        { url: "stun:stun.voxgratia.org" },
+        { url: "stun:stun.xten.com" },
+      ],
+    },
+  });
 
-  
   // get user media
   useEffect(() => {
     const userMedia = async () => {

@@ -1,9 +1,10 @@
 import { io } from "socket.io-client";
 
-// https://oyster-app-s6lgs.ondigitalocean.app/
+// https://api.filmingo.us/
 // http://localhost:5000/
+// process.env.API_URL
 
-const URL = "https://oyster-app-s6lgs.ondigitalocean.app/";
+const URL = "https://api.filmingo.us/" || "http://localhost:5000/";
 
 export const socket = io(URL, {
     reconnectionDelay: 1000,
