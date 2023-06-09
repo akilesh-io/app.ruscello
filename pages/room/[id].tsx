@@ -17,13 +17,12 @@ export default function Room() {
 
   const { id: roomName } = router.query;
   
-  // prevent space bar from scrolling page
+  useEffect(() => {
+    socket.emit("join", { room: roomName, socketId: socket.io.engine.id });
+      // prevent space bar from scrolling this page down 
   window.onkeydown = function (e) {
     return !(e.keyCode == 32);
   };
-  
-  useEffect(() => {
-    socket.emit("join", { room: roomName, socketId: socket.io.engine.id });
   }, [roomName]);
 
   function callVideoAndFace() {
