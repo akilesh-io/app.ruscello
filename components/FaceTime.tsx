@@ -154,7 +154,7 @@ export default function FaceTime() {
 
   return (
     <div className="h-screen p-2">
-      <Draggable bounds="parent" defaultClassName="z-20">
+      <Draggable bounds="parent">
         <div className="cursor-grab flex flex-col justify-end items-end fixed bottom-16 right-4 space-y-10">
           <div className="flex flex-row ">
             <video
@@ -172,7 +172,7 @@ export default function FaceTime() {
           </div>
         </div>
       </Draggable>
-      <div className="flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10 z-20">
+      <div className="flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10">
         <button
           onClick={toggleMic}
           type="button"

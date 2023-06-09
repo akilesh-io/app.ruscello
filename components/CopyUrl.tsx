@@ -21,7 +21,7 @@ export default function CopyUrl() {
   }
 
   return (
-    <div className="m-2">
+    <div className="absolute m-2 z-20">
       <CopyToClipboard
         text={fullPath + router.asPath}
         onCopy={() => setCopy(true)}
