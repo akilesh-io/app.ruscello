@@ -6,7 +6,7 @@
   right: 0;
   left: 0;
   flex-direction: column;
-  /* z-index: 1; */
+  z-index: 1;
   display: flex;
   justify-content: space-between;
 }
@@ -23,6 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .slider__container {
@@ -69,4 +70,22 @@ Use these three colors for the controls
 .icon__btn {
   padding: 0 10px;
   color: #D97777;
+}
+
+/* allign it in center */
+.fast__rewind {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.fast__forward {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
 }

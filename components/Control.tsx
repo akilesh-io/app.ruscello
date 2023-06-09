@@ -66,8 +66,10 @@ const Control = ({
         <h2>Filmingo</h2>
       </div>
       <div className={styles.mid__container}>
-        <div className={styles.icon__btn} onDoubleClick={onRewind}>
-          <FastRewind fontSize="medium" />
+        <div className={styles.fast__rewind} onDoubleClick={onRewind}>
+          <div className={styles.icon__btn}>
+            <FastRewind fontSize="medium" />
+          </div>
         </div>
 
         <div className={styles.icon__btn} onClick={onPlayPause}>
@@ -78,8 +80,10 @@ const Control = ({
           )}{" "}
         </div>
 
-        <div className={styles.icon__btn}>
-          <FastForward fontSize="medium" onDoubleClick={onForward} />
+        <div className={styles.fast__forward} onDoubleClick={onForward}>
+          <div className={styles.icon__btn}>
+            <FastForward fontSize="medium" />
+          </div>
         </div>
       </div>
       <div className={styles.bottom__container}>
