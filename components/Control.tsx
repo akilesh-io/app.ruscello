@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "@mui/material/Slider";
 
 import FastForward from "@mui/icons-material/FastForward";
 import FastRewind from "@mui/icons-material/FastRewind";
 import Pause from "@mui/icons-material/Pause";
 import PlayArrow from "@mui/icons-material/PlayArrow";
-import SkipNext from "@mui/icons-material/SkipNext";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import VolumeOff from "@mui/icons-material/VolumeOff";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+import SyncIcon from "@mui/icons-material/Sync";
 
 import styles from "@/styles/Control.module.css";
 
@@ -32,7 +32,34 @@ const Control = ({
   fullScreen,
   handleClickFullscreen,
   controlRef,
+  onSync,
 }) => {
+  {
+    /* on press space button in keyboard call all the control navigations using switch statement for p[lay, pause seek, etc... */
+  }
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      switch (e.code) {
+        case "Space":
+          onPlayPause();
+          break;
+        case "ArrowRight":
+          onForward();
+          break;
+        case "ArrowLeft":
+          onRewind();
+          break;
+        default:
+          break;
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onPlayPause, onForward, onRewind]);
+
   return (
     <div className={styles.control_Container} ref={controlRef}>
       <div className={styles.top_container}>
@@ -79,8 +106,8 @@ const Control = ({
               )}{" "}
             </div>
 
-            <div className={styles.icon__btn}>
-              <SkipNext fontSize="medium" />
+            <div className={styles.icon__btn} onClick={onSync}>
+              <SyncIcon fontSize="medium" />
             </div>
 
             <div className={styles.icon__btn} onClick={onMute}>

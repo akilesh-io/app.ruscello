@@ -51,11 +51,20 @@ export default function Video({ videoFilePath }) {
   const rewindHandler = () => {
     //Rewinds the video player reducing 5
     videoPlayerRef.current.seekTo(videoPlayerRef.current.getCurrentTime() - 5);
+
+    socket.emit("Winds", videoPlayerRef.current.getCurrentTime() - 5, {
+      room: roomName,
+    });
+
   };
 
   const handleFastFoward = () => {
     //FastFowards the video player by adding 10
     videoPlayerRef.current.seekTo(videoPlayerRef.current.getCurrentTime() + 10);
+
+    socket.emit("Winds", videoPlayerRef.current.getCurrentTime() + 10, {
+      room: roomName,
+    });
   };
 
   //console.log("========", (controlRef.current.style.visibility = "false"));
@@ -131,6 +140,12 @@ export default function Video({ videoFilePath }) {
     setVideoState({ ...videoState, buffer: false });
   };
 
+  const syncVideoHandler = () => {
+    const currentTime = videoPlayerRef.current.getCurrentTime();
+    socket.emit("syncVideo", currentTime, { room: roomName });
+  };  
+ 
+
   useEffect(() => {
     socketInitializer();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -144,6 +159,17 @@ export default function Video({ videoFilePath }) {
       console.log(videoState);
       videoPlayerRef.current.seekTo(parseFloat(videoState) / 100);
     });
+
+    socket.on("updateWinds", (videoState) => {
+      console.log(videoState);
+      videoPlayerRef.current.seekTo(parseFloat(videoState));
+    });
+
+    socket.on("updateVideo", (currentTime) => { 
+      console.log("🚀 ~ file: video.tsx:155 ~ socket.on ~ currentTime:", currentTime)
+      videoPlayerRef.current.seekTo(currentTime);
+    });
+    
   };
 
   function handleClickFullscreen() {
@@ -195,6 +221,7 @@ export default function Video({ videoFilePath }) {
               fullScreen={fullScreen}
               handleClickFullscreen={handleClickFullscreen}
               controlRef={controlRef}
+              onSync={syncVideoHandler}
             />
           </div>
         </div>
