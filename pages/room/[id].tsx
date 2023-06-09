@@ -41,7 +41,7 @@ export default function Room() {
     <Layout>
       <FeedbackModal />
       <div>
-        <div className="w-full h-full relative z-10" ref={videoAndFace}>
+        <div className="w-full h-full relative" ref={videoAndFace}>
           <div ref={videoAlone}>
             <FileUpload />
           </div>

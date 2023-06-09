@@ -73,7 +73,7 @@ export default function Video({ videoFilePath }) {
       console.log("close");
       controlRef.current.style.visibility = "hidden"; // toggling player control container
     } else if (controlRef.current.style.visibility === "visible") {
-      count += 2; //1
+      count += 1; //1
     }
 
     if (!seeking) {
