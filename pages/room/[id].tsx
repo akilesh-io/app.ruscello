@@ -16,7 +16,12 @@ export default function Room() {
   const videoAlone = useRef<any>(null);
 
   const { id: roomName } = router.query;
-
+  
+  // prevent space bar from scrolling page
+  window.onkeydown = function (e) {
+    return !(e.keyCode == 32);
+  };
+  
   useEffect(() => {
     socket.emit("join", { room: roomName, socketId: socket.io.engine.id });
   }, [roomName]);
