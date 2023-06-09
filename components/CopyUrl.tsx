@@ -12,7 +12,7 @@ export default function CopyUrl() {
   const fullPath =
     typeof window !== "undefined" && window.location.origin
       ? window.location.origin
-      : "https://app-ruscello.vercel.app";
+      : "https://app.filmingo.us";
 
   if (copy) {
     setTimeout(() => {
