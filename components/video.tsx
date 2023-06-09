@@ -55,7 +55,6 @@ export default function Video({ videoFilePath }) {
     socket.emit("Winds", videoPlayerRef.current.getCurrentTime() - 5, {
       room: roomName,
     });
-
   };
 
   const handleFastFoward = () => {
@@ -69,11 +68,12 @@ export default function Video({ videoFilePath }) {
 
   //console.log("========", (controlRef.current.style.visibility = "false"));
   const progressHandler = (state) => {
-    if (count > 2) {
+    if (count > 1) {
+      //2
       console.log("close");
       controlRef.current.style.visibility = "hidden"; // toggling player control container
     } else if (controlRef.current.style.visibility === "visible") {
-      count += 1;
+      count += 2; //1
     }
 
     if (!seeking) {
@@ -143,9 +143,7 @@ export default function Video({ videoFilePath }) {
   const syncVideoHandler = () => {
     const currentTime = videoPlayerRef.current.getCurrentTime();
     socket.emit("syncVideo", currentTime, { room: roomName });
-  };  
- 
-
+  };
   useEffect(() => {
     socketInitializer();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -156,20 +154,16 @@ export default function Video({ videoFilePath }) {
     });
 
     socket.on("updateSeek", (videoState) => {
-      console.log(videoState);
       videoPlayerRef.current.seekTo(parseFloat(videoState) / 100);
     });
 
     socket.on("updateWinds", (videoState) => {
-      console.log(videoState);
       videoPlayerRef.current.seekTo(parseFloat(videoState));
     });
 
-    socket.on("updateVideo", (currentTime) => { 
-      console.log("🚀 ~ file: video.tsx:155 ~ socket.on ~ currentTime:", currentTime)
+    socket.on("updateVideo", (currentTime) => {
       videoPlayerRef.current.seekTo(currentTime);
     });
-    
   };
 
   function handleClickFullscreen() {
@@ -184,7 +178,6 @@ export default function Video({ videoFilePath }) {
       <div ref={videoAndControl} className="relative">
         <div
           className="md:max-w-screen-lg xl:max-w-screen-lg 2xl:max-w-screen-xl h-full"
-          //onDoubleClick={handleClickFullscreen}
           onMouseMove={mouseMoveHandler}
         >
           <ReactPlayer
