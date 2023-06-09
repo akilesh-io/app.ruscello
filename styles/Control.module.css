@@ -75,7 +75,7 @@ Use these three colors for the controls
 /* allign it in center */
 .fast__rewind {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -83,7 +83,7 @@ Use these three colors for the controls
 
 .fast__forward {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   width: 100%;
