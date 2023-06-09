@@ -10,9 +10,13 @@ export default function Meta() {
       />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://filmingo.me" />
-      <meta
+      {/* <meta
         property="og:image"
         content="https://res.cloudinary.com/davkfrmah/image/upload/v1686146984/Filmingo/temp_film_bvuced.jpg"
+      /> */}
+      <meta
+        property="og:image"
+        content="https://res.cloudinary.com/davkfrmah/image/upload/v1684239381/Filmingo/flamingo_logo.png"
       />
       <meta property="og:image:alt" content="Filmingo" />
       <meta property="og:image:width" content="1200" />
