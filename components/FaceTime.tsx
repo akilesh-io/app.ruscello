@@ -19,7 +19,6 @@ export default function FaceTime() {
   const renderVideo = useRef<any>(null);
   const userVideoRef = useRef<any>();
   const [videoSources, setVideoSources] = useState<any>([]);
-  //let myVideoStream = { id: socket.id, stream: userVideoRef.current.srcObject };
 
   const peer = new Peer();
 
@@ -159,46 +158,51 @@ export default function FaceTime() {
           <div className="flex flex-row ">
             <video
               ref={userVideoRef}
-              className="w-40 bg-blue-100 rounded border-blue-400 mr-2"
+              className="w-40 bg-blue-100 rounded border-blue-400 mr-2 h-min"
               autoPlay
               muted
             />
 
             <video
               ref={renderVideo}
-              className="w-40 bg-green-100 rounded border-green-400"
+              className="w-40 bg-green-100 rounded border-green-400 h-min"
               autoPlay
             />
+
+            <div className="flex relative flex-col items-center justify-between pl-2">
+              <button
+                onClick={toggleMic}
+                type="button"
+                className="text-white bg-gradient-to-br from-teal-300  to-lime-300  hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-2 py-2 text-center mr-2 mb-2"
+              >
+                {micActive ? (
+                  <MicIcon className="text-black" fontSize="medium" />
+                ) : (
+                  <MicOffIcon className="text-black" fontSize="medium" />
+                )}
+              </button>
+              <button
+                onClick={leave}
+                type="button"
+                className="font-medium rounded-lg text-sm text-center mr-2 mb-2"
+              >
+                <CallEndIcon className="text-secondary" fontSize="large" />
+              </button>
+              <button
+                className="text-white bg-gradient-to-br from-teal-300  to-lime-300  hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-2 py-2 text-center mr-2 mb-2"
+                onClick={toggleCamera}
+                type="button"
+              >
+                {cameraActive ? (
+                  <VideocamIcon className="text-black" fontSize="medium" />
+                ) : (
+                  <VideocamOffIcon className="text-black" fontSize="medium" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </Draggable>
-      <div className="flex flex-row justify-center items-center fixed bottom-0 w-full space-x-10">
-        <button
-          onClick={toggleMic}
-          type="button"
-          className="text-white bg-gradient-to-br from-teal-300  to-lime-300  hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-        >
-          {micActive ? (
-            <MicIcon className="text-black" fontSize="medium" />
-          ) : (
-            <MicOffIcon className="text-black" fontSize="medium" />
-          )}
-        </button>
-        <button onClick={leave} type="button">
-          <CallEndIcon className="text-secondary" fontSize="large" />
-        </button>
-        <button
-          className="text-white bg-gradient-to-br from-teal-300  to-lime-300  hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-          onClick={toggleCamera}
-          type="button"
-        >
-          {cameraActive ? (
-            <VideocamIcon className="text-black" fontSize="medium" />
-          ) : (
-            <VideocamOffIcon className="text-black" fontSize="medium" />
-          )}
-        </button>
-      </div>
     </div>
   );
 }
