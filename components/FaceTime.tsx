@@ -15,31 +15,23 @@ export default function FaceTime() {
   const router = useRouter();
   const { id: roomName } = router.query;
   const [micActive, setMicActive] = useState(true);
-  const [cameraActive, setCameraActive] = useState(true);
+  const [cameraActive, setCameraActive] = useState(false);
   const renderVideo = useRef<any>(null);
-  const userVideoRef = useRef<any>();
+  const userVideoRef = useRef<any>(null);
   const [videoSources, setVideoSources] = useState<any>([]);
 
-  const peer = new Peer();
+  const peer = new Peer({
+    config: {
+      iceServers: [
+        { url: "stun:stun1.l.google.com:19302" },
+        { url: "stun:stun2.l.google.com:19302" },
+      ],
+    },
+  });
 
   // get user media
   useEffect(() => {
-    const userMedia = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: true,
-        });
-        userVideoRef.current.srcObject = stream;
-      } catch (err) {
-        console.log("Failed to get local stream" + err);
-      }
-    };
-    userMedia();
-
     peer.on("open", (id) => {
-      //console.log("My peer ID is: " + id);
-      //myVideoStream.id = id;
       socket.emit("joinUser", roomName, id);
     });
 
@@ -49,63 +41,56 @@ export default function FaceTime() {
 
     // Handle incoming voice/video connection
     peer.on("call", (call) => {
-      const getRemoteMedia = async () => {
-        try {
-          const remoteStream = await navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: true,
-          });
-          // Answer the call with an A/V stream.
-          call.answer(remoteStream);
-          call.on("stream", (remoteStream) => {
-            setVideoSources((videoSources) => {
-              if (!videoSources.some((e) => e.id === call.peer)) {
-                return [
-                  ...videoSources,
-                  { id: call.peer, stream: remoteStream },
-                ];
-              } else {
-                return videoSources;
-              }
-            });
-            //  Show stream in some video/canvas element.
-            renderVideo.current.srcObject = remoteStream;
-          });
-        } catch (err) {
-          console.log("Failed to get local stream" + err);
-        }
-      };
-      getRemoteMedia();
-    });
-
-    socket.on("user-connected", (userId) => {
-      // Call the new user
-      const call = peer.call(userId, userVideoRef.current.srcObject);
-
-      // When they answer, add their video
+      // Answer the call with an A/V stream.
+      call.answer();
       call.on("stream", (remoteStream) => {
         setVideoSources((videoSources) => {
-          if (!videoSources.some((e) => e.id === userId)) {
-            return [...videoSources, { id: userId, stream: remoteStream }];
+          if (!videoSources.some((e) => e.id === call.peer)) {
+            return [...videoSources, { id: call.peer, stream: remoteStream }];
           } else {
             return videoSources;
           }
         });
+        //  Show stream in some video/canvas element.
         renderVideo.current.srcObject = remoteStream;
       });
+    });
 
-      // If they leave, remove their video (doesn't work)
-      call.on("close", () => {
-        //  If the call gives an error
-        call.on("error", (err) => {
-          console.log(err);
+    socket.on("user-connected", (userId) => {
+      // Call the new user
+      if (userVideoRef.current.srcObject) {
+        const call = peer.call(userId, userVideoRef.current.srcObject);
+
+        // When they answer, add their video
+        call.on("stream", (remoteStream) => {
+          setVideoSources((videoSources) => {
+            if (!videoSources.some((e) => e.id === userId)) {
+              return [...videoSources, { id: userId, stream: remoteStream }];
+            } else {
+              return videoSources;
+            }
+          });
+
+          //  Show stream in some video/canvas element.
+          renderVideo.current.srcObject = remoteStream;
         });
-      });
+
+        // If they leave, remove their video (doesn't work)
+        call.on("close", () => {
+          //  If the call gives an error
+          call.on("error", (err) => {
+            console.log(err);
+          });
+        });
+      }
     });
 
     // If a user disconnect
     socket.on("user-disconnected", (userId) => {
       renderVideo.current.srcObject = null;
+      setVideoSources((videoSources) => {
+        return videoSources.filter((e) => e.id !== userId);
+      });
     });
 
     return () => {
@@ -114,28 +99,41 @@ export default function FaceTime() {
       peer.off("open");
       peer.off("call");
     };
-  }, []);
+  }, [cameraActive, renderVideo, roomName, userVideoRef]);
 
   function toggleMic() {
     setMicActive((prev) => !prev);
 
-    if (micActive) {
-      userVideoRef.current.srcObject.getAudioTracks()[0].enabled = false;
-    }
-    if (!micActive) {
-      userVideoRef.current.srcObject.getAudioTracks()[0].enabled = true;
+    if (micActive === false) {
+      userVideoRef.current.srcObject.getAudioTracks().forEach((track) => {
+        track.enabled = true;
+      });
+    } else {
+      userVideoRef.current.srcObject.getAudioTracks().forEach((track) => {
+        track.enabled = false;
+      });
     }
   }
 
-  const toggleCamera = () => {
-    setCameraActive((prev) => !prev);
+  const toggleCamera = async () => {
+    if (!userVideoRef.current.srcObject) {
+      await navigator.mediaDevices
+        .getUserMedia({
+          video: true,
+          audio: true,
+        })
+        .then((stream) => {
+          userVideoRef.current.srcObject = stream;
+        })
+    }
 
     if (cameraActive) {
       userVideoRef.current.srcObject.getVideoTracks()[0].enabled = false;
-    }
-    if (!cameraActive) {
+    } else {
       userVideoRef.current.srcObject.getVideoTracks()[0].enabled = true;
     }
+
+    setCameraActive((prev) => !prev);
   };
 
   async function leave() {
@@ -165,7 +163,7 @@ export default function FaceTime() {
 
             <video
               ref={renderVideo}
-              className="w-40 bg-green-100 rounded border-green-400 h-min"
+              className="w-40 bg-green-100 rounded border-green-400 mr-2 h-min"
               autoPlay
             />
 
