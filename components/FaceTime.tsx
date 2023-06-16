@@ -151,8 +151,8 @@ export default function FaceTime() {
 
   return (
     <div className="h-screen p-2">
-      <Draggable bounds="parent">
-        <div className="cursor-grab flex flex-col justify-end items-end fixed bottom-16 right-4 space-y-10">
+      <Draggable cancel="button" bounds="parent">
+        <div className="cursor-grab flex flex-col justify-end items-end fixed bottom-16 right-4 space-y-10 box">
           <div className="flex flex-row ">
             <video
               ref={userVideoRef}
