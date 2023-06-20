@@ -24,8 +24,8 @@ export default function Meta() {
 
       <Script
         async
+        defer
         src="https://scripts.simpleanalyticscdn.com/latest.js"
-        strategy="afterInteractive"
       ></Script>
       <noscript>
         {/* eslint-disable @next/next/no-img-element */}
