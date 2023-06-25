@@ -32,6 +32,11 @@ http://jsfiddle.net/j40s2bvd/
 * TO implement video call feature Refer this code:
 https://github.com/Alamir151/zoom-clone
 
+* Torrent streaming:
+https://codesandbox.io/s/github/dbrowne24/webtorrent-react/tree/master/?file=/src/App.js
+https://github.com/dbrowne24/webtorrent-react/tree/master/
+https://github.com/qqdaiyu55/YanQi/blob/ab61d5933dd106fbed33ee4b6681907353c1bbc2/src/client/containers/Video.js#L9
+
 ### It Is Wt It Is:
 
 [![DeepSource](https://app.deepsource.com/gh/Akilesh2112/app.ruscello.svg/?label=active+issues&show_trend=true&token=tlXXVZoDXwFhc09fMmX-eT9s)](https://app.deepsource.com/gh/Akilesh2112/app.ruscello/?ref=repository-badge)
