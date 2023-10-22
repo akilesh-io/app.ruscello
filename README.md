@@ -9,12 +9,17 @@
     A video player that allows you to watch synchronized content with your friends and family.
     <br />
     <br />
+    <a href="[https://discord.gg/nfwPRb9](https://discord.gg/afmkUY4)"><img src="https://img.shields.io/badge/discord-chat-brightgreen.svg" alt="discord"></a>
+    <br />      
     <a href="https://filmingo.us/">Application Link </a>
   </p>
 
 </p>
 
 ---
+
+![pika-1686124715526-1x](https://github.com/akilesh-io/app.ruscello/assets/53332156/d199e338-5abb-4342-8102-2fa3539bcee7)
+
 
 ## Getting Started
 
@@ -28,6 +33,9 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## ‼️ Note
+
+This is the frontend of the web app. You can get the server [here](https://github.com/akilesh-io/api.ruscello)
 
 
 # Ref:
