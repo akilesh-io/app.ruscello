@@ -29,16 +29,43 @@
 # install dependencies
 $ yarn install
 
-# serve with hot reload at localhost:3000
+# serve at localhost:3000
 $ yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the app.
+> Note: You can also test peer to peer connection locally by opening multiple tabs.
+ 
 
 ## ‼️ Note
 
 This is the frontend of the web app. You can get the server [here](https://github.com/akilesh-io/api.ruscello)
 
+
+## 🌳 Environment Variables
+
+Set `API_URL` env var to the server's url
+> Note: If you are running the server locally, set `API_URL=http://localhost:5000` and make sure the [server](https://github.com/akilesh-io/api.ruscello) is running on port 5000
+
+
+## 👣 Steps
+
+1. Create a room ➕
+2. Invite your friends 🕺
+3. Add video 🎬
+4. Chill 🍿
+
+## ✨ Features
+
+✅  Minimal UI 🔮  
+✅  Floating video 📺  
+✅  Stream youtube videos ▶️  
+✅  Local media playback 📁  
+✅  Sync playback 🔄  
+🔳  Stream online videos 🌐  
+🔳  Torrent Streaming 🧲   
+🔳  Subtitles 📄   
+🔳  No refreshes needed ⌛️  
 
 
 # Reference:
@@ -56,7 +83,7 @@ https://mui.com/material-ui/customization/how-to-customize/
 http://jsfiddle.net/zrxewhgL/
 http://jsfiddle.net/j40s2bvd/
 
-* TO implement video call feature Refer this code:
+* To implement video call feature Refer this code:
 https://github.com/Alamir151/zoom-clone
 
 * Torrent streaming:
@@ -64,4 +91,4 @@ https://codesandbox.io/s/github/dbrowne24/webtorrent-react/tree/master/?file=/sr
 https://github.com/dbrowne24/webtorrent-react/tree/master/
 https://github.com/qqdaiyu55/YanQi/blob/ab61d5933dd106fbed33ee4b6681907353c1bbc2/src/client/containers/Video.js#L9
 
-* [Additional Reference in Notion](https://akilesh-io.notion.site/Facetime-for-android-eb22f08b7f8248d3becdaedd438be017?pvs=4)
+* **[Additional Reference](https://akilesh-io.notion.site/Facetime-for-android-eb22f08b7f8248d3becdaedd438be017?pvs=4) In Notion**
