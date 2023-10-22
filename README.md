@@ -9,7 +9,7 @@
     A video player that allows you to watch synchronized content with your friends and family.
     <br />
     <br />
-    <a href="[https://discord.gg/nfwPRb9](https://discord.gg/afmkUY4)"><img src="https://img.shields.io/badge/discord-chat-brightgreen.svg" alt="discord"></a>
+    <a href="https://discord.gg/afmkUY4"><img src="https://img.shields.io/badge/discord-chat-brightgreen.svg" alt="discord"></a>
     <br />      
     <a href="https://filmingo.us/">Application Link </a>
   </p>
@@ -23,12 +23,14 @@
 
 ## Getting Started
 
-First, run the development server:
+🌀Spin, local development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
+# install dependencies
+$ yarn install
+
+# serve with hot reload at localhost:3000
+$ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -62,5 +64,4 @@ https://codesandbox.io/s/github/dbrowne24/webtorrent-react/tree/master/?file=/sr
 https://github.com/dbrowne24/webtorrent-react/tree/master/
 https://github.com/qqdaiyu55/YanQi/blob/ab61d5933dd106fbed33ee4b6681907353c1bbc2/src/client/containers/Video.js#L9
 
-
-[Additional Reference](https://akilesh-io.notion.site/Facetime-for-android-eb22f08b7f8248d3becdaedd438be017?pvs=4)
+* [Additional Reference in Notion](https://akilesh-io.notion.site/Facetime-for-android-eb22f08b7f8248d3becdaedd438be017?pvs=4)
