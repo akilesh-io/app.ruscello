@@ -38,7 +38,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 This is the frontend of the web app. You can get the server [here](https://github.com/akilesh-io/api.ruscello)
 
 
-# Ref:
+
+# Reference:
 
 * React Video controler:
 https://code.pieces.app/blog/react-player-customized-controls
@@ -60,9 +61,3 @@ https://github.com/Alamir151/zoom-clone
 https://codesandbox.io/s/github/dbrowne24/webtorrent-react/tree/master/?file=/src/App.js
 https://github.com/dbrowne24/webtorrent-react/tree/master/
 https://github.com/qqdaiyu55/YanQi/blob/ab61d5933dd106fbed33ee4b6681907353c1bbc2/src/client/containers/Video.js#L9
-
-### It Is Wt It Is:
-
-[![DeepSource](https://app.deepsource.com/gh/Akilesh2112/app.ruscello.svg/?label=active+issues&show_trend=true&token=tlXXVZoDXwFhc09fMmX-eT9s)](https://app.deepsource.com/gh/Akilesh2112/app.ruscello/?ref=repository-badge)
-
-[![DeepSource](https://app.deepsource.com/gh/Akilesh2112/app.ruscello.svg/?label=resolved+issues&show_trend=true&token=tlXXVZoDXwFhc09fMmX-eT9s)](https://app.deepsource.com/gh/Akilesh2112/app.ruscello/?ref=repository-badge)
