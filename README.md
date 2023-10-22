@@ -1,3 +1,20 @@
+<p align="center">
+  <a href="https://filmingo.us/">
+    <img src="https://res.cloudinary.com/davkfrmah/image/upload/v1684239381/Filmingo/flamingo_logo.png" alt="Logo" width="100" height="100">
+  </a>
+
+  <h3 align="center">Filmingo - Watch Movies Together </h3>
+
+  <p align="center">
+    A video player that allows you to watch synchronized content with your friends and family.
+    <br />
+    <br />
+    <a href="https://filmingo.us/">Application Link </a>
+  </p>
+
+</p>
+
+---
 
 ## Getting Started
 
