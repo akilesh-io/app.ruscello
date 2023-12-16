@@ -67,7 +67,7 @@ export default function Video({ videoFilePath }) {
 
   //console.log("========", (controlRef.current.style.visibility = "false"));
   const progressHandler = (state) => {
-    if (count > 1) {
+    if (count > 0.5) {
       //2
       console.log("close");
       controlRef.current.style.visibility = "hidden"; // toggling player control container
