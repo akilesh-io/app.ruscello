@@ -4,8 +4,9 @@ import { useEffect, useRef } from "react";
 import { socket } from "@/context/socketUrl";
 import { useRouter } from "next/router";
 import screenfull from "screenfull";
-import CopyUrl from "@/components/CopyUrl";
 import FeedbackModal from "@/components/Feedback";
+import CopyUrl from "@/components/CopyUrl";
+import { Toaster } from 'sonner';
 
 const FaceTime = dynamic(() => import("@/components/FaceTime"), { ssr: false });
 const FileUpload = dynamic(() => import("@/components/FileUpload"));
@@ -39,15 +40,18 @@ export default function Room() {
 
   return (
     <Layout>
-      <FeedbackModal />
+      {/* <FeedbackModal /> */}
+      <CopyUrl />
+
       <div>
-        <div className="w-full h-full relative" ref={videoAndFace}>
+        <div ref={videoAndFace}>
           <div ref={videoAlone}>
             <FileUpload />
           </div>
-          <CopyUrl />
         </div>
-        <FaceTime />
+        {/* <FaceTime /> */}
+        <Toaster />
+
       </div>
     </Layout>
   );
