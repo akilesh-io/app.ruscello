@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import screenfull from "screenfull";
 import FeedbackModal from "@/components/Feedback";
 import CopyUrl from "@/components/CopyUrl";
-import { Toaster } from 'sonner';
+import { Toaster, toast } from 'sonner';
 
 const FaceTime = dynamic(() => import("@/components/FaceTime"), { ssr: false });
 const FileUpload = dynamic(() => import("@/components/FileUpload"));
@@ -17,14 +17,28 @@ export default function Room() {
   const videoAlone = useRef<any>(null);
 
   const { id: roomName } = router.query;
-  
+
   useEffect(() => {
     socket.emit("join", { room: roomName, socketId: socket.io.engine.id });
-      // prevent space bar from scrolling this page down 
-  window.onkeydown = function (e) {
-    return !(e.keyCode == 32);
-  };
+    // prevent space bar from scrolling this page down 
+    window.onkeydown = function (e) {
+      return !(e.keyCode == 32);
+    };
   }, [roomName]);
+
+  useEffect(() => {
+    socketInitializer();
+  }, []);
+
+  const socketInitializer = () => {
+    socket.on("new", (data) => {
+      toast.success("New user joined");
+    });
+
+    socket.on("user-disconnected", (data) => {
+      toast.error("User disconnected");
+    });
+  }
 
   function callVideoAndFace() {
     if (screenfull.isEnabled) {
