@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DoneIcon from "@mui/icons-material/Done";
+import { toast } from 'sonner';
 
 export default function CopyUrl() {
   const router = useRouter();
@@ -21,10 +22,14 @@ export default function CopyUrl() {
   }
 
   return (
-    <div className="absolute m-2 z-20">
+    <div className="fixed top-4 right-4 z-50">
       <CopyToClipboard
         text={fullPath + router.asPath}
-        onCopy={() => setCopy(true)}
+        onCopy={() => {
+          setCopy(true)
+          toast("Copied to clipboard");
+        }
+        }
       >
         <button
           type="button"
