@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 // http://localhost:5000/
 // process.env.API_URL
 
-const URL = "https://api.filmingo.us/" || "http://localhost:5000/";
+const URL = "https://ideal-joanie-lamento-ca86ef6f.koyeb.app/" || "http://localhost:5000/";
 
 export const socket = io(URL, {
     reconnectionDelay: 1000,
