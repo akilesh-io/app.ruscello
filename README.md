@@ -9,7 +9,9 @@
     A video player that allows you to watch synchronized content with your friends and family.
     <br />
     <br />
-<!--     <a href="https://discord.gg/afmkUY4"><img src="https://img.shields.io/badge/discord-chat-brightgreen.svg" alt="discord"></a> -->
+    <a href="https://github.com/akilesh-io/api.ruscello"><img src="https://img.shields.io/badge/API-live-brightgreen.svg" alt="API"></a>
+    <a href="https://filmingo.akilesh.in/"><img src="https://img.shields.io/badge/Landing Page-live-brightgreen.svg" alt="Filmingo"></a>
+    
     <br />      
     <a href="https://filmingo.us/">Application Link </a>
   </p>
