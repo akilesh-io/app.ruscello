@@ -1,3 +1,9 @@
+
+<p align="right">
+I abandoned this project but you don't, If you like this project own it
+  <br />-Akilesh
+</p>
+
 <p align="center">
   <a href="https://filmingo.us/">
     <img src="https://res.cloudinary.com/davkfrmah/image/upload/v1684239381/Filmingo/flamingo_logo.png" alt="Logo" width="100" height="100">
